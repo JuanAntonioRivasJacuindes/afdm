@@ -31,29 +31,31 @@ use Intervention\Image\ImageManagerStatic as Image;
 */
 
 //Admin Routes
-Route::prefix('admin')->middleware( ['permission:manage_system'])->group( function () {
+Route::prefix('admin')->middleware(['permission:manage_system'])->group(function () {
     Route::get('/', [AdminController::class, 'adminPanel'])->middleware('auth')->name('admin');
+
+    Route::get('/install', [InstallController::class, 'install']);
 });
 // Route::get('image', function() {
 //     $img = Image::make('storage/course/flyers/bTEXpNSmBIjbZkg98ASAN5hIITM21QVtupNPwh32.jpg')->resize(200, 200);
 
 //     return $img->response('webp');
 // });
-Route::prefix('coordination')->middleware( ['permission:manage_content'])->group( function () {
+Route::prefix('coordination')->middleware(['permission:manage_content'])->group(function () {
     Route::get('/', [AdminController::class, 'coordinatorPanel'])->middleware('auth')->name('coordination');
 });
 
 
 Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment')->name('diploma.show');
 //end Admin Routes
-Route::post('update/zoomLink',[DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
+Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
 
 //Diploma routes
 
 //end diploma routes
 Route::resource('diploma', DiplomaController::class)->except(['show']);
-Route::post('diploma/update/flyer', [DiplomaController::class,'updateFlyer'])->name('diploma.update.flyer');
-Route::post('diploma/update/poster', [DiplomaController::class,'updatePoster'])->name('diploma.update.poster');
+Route::post('diploma/update/flyer', [DiplomaController::class, 'updateFlyer'])->name('diploma.update.flyer');
+Route::post('diploma/update/poster', [DiplomaController::class, 'updatePoster'])->name('diploma.update.poster');
 
 // Route::get('diploma/create', [DiplomaController::class, 'create'])->name('diploma.create');
 // Route::get('diploma/edit', [DiplomaController::class, 'edit'])->name('diploma.edit');
@@ -63,7 +65,7 @@ Route::get('/', function () {
     $diplomas = Diploma::where('status_id', 1)->get();
     $courses = Course::all();
     $header = "hola";
-    return view('welcome', compact('diplomas', 'courses','header'));
+    return view('welcome', compact('diplomas', 'courses', 'header'));
 })->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -78,8 +80,6 @@ Route::get('/course/preview/{course_id}', [CourseController::class, 'preview'])-
 Route::get('/sb', function () {
     return view('sandbox');
 });
-
-Route::get('/install', [InstallController::class, 'install']);
 
 
 Route::get('create_payment_method/', function () {
@@ -119,7 +119,7 @@ Route::prefix('resources')->group(function () {
 Route::get('view-session', function () {
     return view('student.diploma.index');
 });
-Route::resource('user',UserController::class)->middleware(['auth','permission:manage_users']);
+Route::resource('user', UserController::class)->middleware(['auth', 'permission:manage_users']);
 //Autenticacion Social
 Route::get('auth/{provider}', [SocialAuthController::class, 'redirectToProvider'])->name('social.auth');
 Route::get('auth/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);

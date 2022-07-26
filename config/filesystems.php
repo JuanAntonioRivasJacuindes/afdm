@@ -67,7 +67,7 @@ return [
     */
 
     'links' => [
-        public_path('/../test_afodemy') => storage_path('app/public'),
+        public_path('/../test_afodemy/storage') => storage_path('app/public'),
     ],
 
 ];

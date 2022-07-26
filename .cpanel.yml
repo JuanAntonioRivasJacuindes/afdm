@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOY=/home/desarrollo/test.afodemy.com/
-    - export FILE=/home/desarrollo/user_afodemy_files2/
+    - export DEPLOY=/home/desarrollo/user.afodemy.com/
+    - export FILE=/home/desarrollo/user_afodemy/
 
     - /bin/rsync -av --exclude 'index.php' public/ $DEPLOY
     - /bin/rsync -av --exclude 'public/'  ./ $FILE

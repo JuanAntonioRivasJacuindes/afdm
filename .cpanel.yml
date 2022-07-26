@@ -5,5 +5,5 @@ deployment:
     - export FILEPATH=/home/desarrollo/user_afodemy_files2/
 
     - /bin/cp -a --exclude 'index.php' public/ $DEPLOYPATH
-    - /bin/p -a --exclude 'public' $FILEPATH
+    - /bin/p -a --exclude '/public/' $FILEPATH
 

@@ -2,8 +2,8 @@
 deployment:
   tasks:
     - export DEPLOY=/home/desarrollo/user.afodemy.com/
-    - export FILE=/home/desarrollo/user.afodemy.com/laravel/
+    # - export FILE=/home/desarrollo/user.afodemy.com/FILES/
 
     - /bin/rsync -av --exclude 'index.php' public/ $DEPLOY
-    - /bin/rsync -av --exclude 'public/'  ./ $FILE
+    # - /bin/rsync -av --exclude 'public/'  ./ $FILE
 

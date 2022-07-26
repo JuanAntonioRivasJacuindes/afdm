@@ -62,7 +62,7 @@ Route::post('diploma/update/poster', [DiplomaController::class, 'updatePoster'])
 
 //end Diploma routes
 Route::get('/', function () {
-
+    dd(1);
     $diplomas = Diploma::where('status_id', 1)->get();
     $courses = Course::all();
     $header = "hola";

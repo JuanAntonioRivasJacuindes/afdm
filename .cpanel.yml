@@ -2,5 +2,8 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/desarrollo/test.afodemy.com/
+    - export FILEPATH=/home/desarrollo/user_afodemy_files/
+
     - /bin/rsync -av --exclude 'index.php' public/ $DEPLOYPATH
+    - /bin/rsync -av --exclude '/public'  / $FILEPATH
 

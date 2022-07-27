@@ -5,5 +5,5 @@ deployment:
     - export FILE=/home/desarrollo/test_afodemy/
 
 
-    - /bin/rsync -av --exclude 'index.php' public/ $DEPLOY
-    - /bin/rsync -av --exclude 'public/'  ./ $FILE
+    - /bin/cp -R * --exclude 'index.php' public/ $DEPLOY
+    - /bin/cp -R * --exclude 'public/'  ./ $FILE

@@ -4,6 +4,6 @@ deployment:
     - export DEPLOY=/home/desarrollo/test.afodemy.com/
     - export FILE=/home/desarrollo/test_afodemy/
 
-    - /bin/cp -R --exclude public/ ./ $DEPLOY
+    - /bin/cp -R ./ $DEPLOY
     # - /bin/cp -R * --exclude 'index.php' public/ $DEPLOY
     # - /bin/cp -R * --exclude 'public/'  ./ $FILE

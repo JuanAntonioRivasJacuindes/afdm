@@ -32,7 +32,7 @@ class InscriptedUsers extends Component
     {
 
         $this->advisor = Auth::user()->id;
-        $this->diplomas=Diploma::where('status_id',1)->get();
+        $this->diplomas=Diploma::all();
         $this->selectedId=$this->diplomas->first()->id;
         $this->diploma = $this->diplomas->first();
         $this->users = $this->diploma->product->suscribedUsers();

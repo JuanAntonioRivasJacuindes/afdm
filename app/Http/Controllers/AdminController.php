@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Diploma;
 class AdminController extends Controller
 {
     public function adminPanel()
@@ -12,7 +12,8 @@ class AdminController extends Controller
     }
     function coordinatorPanel()
     {
-     return view('Admin.coordination-panel');
+    $diplomas = Diploma::all();
+     return view('Admin.coordination-panel',compact('diplomas'));
      # code...
     }
 }

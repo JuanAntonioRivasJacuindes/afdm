@@ -1,38 +1,13 @@
 <div>
 
-    <header class="border-b border-solid border-gray-300 bg-white">
-        <h2 class="p-6">Inscripciones</h2>
+
         <div class="w-full border-collapse p-5 m-4 box-border rounded-lg bg-gray-100">
-            <div class="flex flex-col m-2 p-3 border-separate shadow-md bg-white">
-                <label for="diploma">Diplomado: </label>
-                <select wire:model="selectedId" id="diploma"
-                    class="form-select appearance-none
-                        block
-                        w-full
-                        px-3
-                        py-1.5
-                        text-base
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding bg-no-repeat
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    aria-label="Default select example">
 
-                    @foreach ($diplomas as $diploma)
-                        <option value="{{ $diploma->id }}">{{ $diploma->title }}</option>
-                    @endforeach
-
-                </select>
-                <x-jet-button class="my-2" wire:click="search">Buscar</x-jet-button>
-
-            </div>
 
             <div class="w-full border-collapse box-border rounded-lg bg-gray-100">
+                <header class="border-b border-solid border-gray-300 bg-white">
+                    <h2 class="p-6">Inscripciones</h2>
+                </header>
                 @if (session()->has('message'))
                     <div
                         class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-md text-green-700 bg-green-100 border border-green-300 ">
@@ -150,5 +125,5 @@
             </div>
         </div>
 
-    </header>
+
 </div>

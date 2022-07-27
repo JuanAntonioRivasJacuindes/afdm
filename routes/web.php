@@ -43,6 +43,7 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 // });
 Route::prefix('coordination')->middleware(['permission:manage_content'])->group(function () {
     Route::get('/', [AdminController::class, 'coordinatorPanel'])->middleware('auth')->name('coordination');
+    Route::get('/diploma/inscriptions', [DiplomaController::class,'inscription'])->name('diploma.inscriptions');
 });
 
 

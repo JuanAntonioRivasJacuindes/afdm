@@ -21,8 +21,13 @@ class DiplomaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function inscription(Request $request)
+    {
+      $diploma = Diploma::find($request->diploma_id);
 
-
+        return view('diploma.inscription',compact('diploma'));
+        # code...
+    }
 
     public function index()
     {

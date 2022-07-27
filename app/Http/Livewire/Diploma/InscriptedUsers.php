@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class InscriptedUsers extends Component
 {
     public $users;
-    public $diplomas;
+
     public $selectedId;
     public $diploma;
     public $addUserId;
@@ -20,7 +20,7 @@ class InscriptedUsers extends Component
     public $voucher;
     public $advisor;
     public $allUsers;
-
+    public $diploma_id;
     protected $rules = [
         'addUserId' => 'required|numeric',
         'voucher' => 'required',
@@ -32,21 +32,18 @@ class InscriptedUsers extends Component
     {
 
         $this->advisor = Auth::user()->id;
-        $this->diplomas=Diploma::all();
-        $this->selectedId=$this->diplomas->first()->id;
-        $this->diploma = $this->diplomas->first();
+        $this->diploma = Diploma::find($this->diploma_id);
         $this->users = $this->diploma->product->suscribedUsers();
-        $this->diploma=Diploma::findOrFail($this->selectedId);
         $this->productId=$this->diploma->product->id;
         $this->allUsers=User::all();
+
     }
 
 
     public function render()
     {
-
-
-
+        $this->diploma = Diploma::find($this->diploma_id);
+        $this->users = $this->diploma->product->suscribedUsers();
         return view('livewire.diploma.inscripted-users');
     }
     public function addInscription()
@@ -67,24 +64,6 @@ class InscriptedUsers extends Component
             session()->flash('message', 'Este usuario ya está inscrito.');
 
         }
-        $this->diploma=Diploma::findOrFail($this->selectedId);
-        $this->users = $this->diploma->product->suscribedUsers();
-        $this->productId=$this->diploma->product->id;
+    }
 
-        # code...
-    }
-    public function search()
-    {
-        $this->diploma=Diploma::findOrFail($this->selectedId);
-        $this->users = $this->diploma->product->suscribedUsers();
-        $this->productId=$this->diploma->product->id;
-
-        # code...
-    }
-    public function wachar()
-    {
-        $this->diploma=Diploma::find($this->selectedId);
-        dd($this->diploma->product->suscribedUsers());
-        # code...
-    }
 }

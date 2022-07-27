@@ -16,7 +16,7 @@
                             <button href="#performance" v-on:click="select('performance')"
                                 class="rounded text-sm text-left block py-3 px-6 hover:bg-blue-600 w-full">Diplomados</button>
                             <button href="#performance" v-on:click="select('new')"
-                                class="rounded text-sm block py-3 px-6 hover:bg-blue-600 w-full text-left">Cursos</button>
+                                class="invisible rounded text-sm block py-3 px-6 hover:bg-blue-600 w-full text-left">Cursos</button>
                             <button href="#performance" v-on:click="select('users')"
                                 class="rounded text-sm block py-3 px-6 hover:bg-blue-600 w-full text-left">Usuario</button>
                         </li>
@@ -27,7 +27,42 @@
 
             <main class="bg-gray-100 h-screen w-full overflow-y-auto">
                 <section v-if="active === 'performance'" id="performance">
-                    @livewire('diploma.inscripted-users')
+
+                    <div class="">
+                        <header class="border-b border-solid border-gray-300 bg-white">
+                            <h2 class="p-6">Diplomados</h2>
+                        </header>
+                        <section class="m-4 bg-white border border-gray-300 border-solid rounded shadow">
+                            <header class="border-b border-solid border-gray-300 p-4 text-lg font-medium">
+                                Diplomados
+                            </header>
+                            <section class=" flex flex-row flex-wrap items-center text-center border-b border-solid border-gray-300">
+                                <ul class="m-5 text-left w-full">
+                                    @foreach ($diplomas as $diploma)
+                                    <a  href="{{route('diploma.inscriptions',['diploma_id'=>$diploma->id])}}">
+
+                                        <li class="w-full my-3 bg-gray-200 p-2 border-2 rounded-sm hover:bg-slate-300">
+
+
+                                                {{$diploma->title ??'no definido'}}
+
+                                        </li>
+                                    </a>
+                                    @endforeach
+                               </ul>
+
+
+                            </section>
+
+
+
+                        </section>
+
+
+                    </div>
+
+
+
                 </section>
 
                 <section v-if="active === 'new'" id="new">

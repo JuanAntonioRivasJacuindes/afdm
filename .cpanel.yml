@@ -1,7 +1,6 @@
 ---
 deployment:
   tasks:
-<<<<<<< HEAD
     - export DEPLOY=/home/desarrollo/test.afodemy.com/
     - export FILE=/home/desarrollo/test_afodemy/
 
@@ -9,10 +8,3 @@ deployment:
     - /bin/rsync -av --exclude 'index.php' public/ $DEPLOY
 
 
-=======
-    - export DEPLOY=/home/desarrollo/user.afodemy.com/
-    - export FILE=/home/desarrollo/user.afodemy.com/laravel/
-
-    - /bin/rsync -av --exclude 'index.php' public/ $DEPLOY
-    - /bin/rsync -av --exclude 'public/'  ./ $FILE
->>>>>>> Desarrollo

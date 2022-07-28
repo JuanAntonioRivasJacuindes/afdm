@@ -1,14 +1,13 @@
 <x-app-layout>
 
     <div class="w-full md:my-7  md:p-5">
-        <div x-data="{ src: '{{ route('select.video') }}', title: 'Seleccione un video' }">
+        <div x-data="{ src: '{{route('select.video')}}', title: 'Seleccione un video' }">
 
             <section class="w-full flex flex-col lg:flex-row bg-gray-100">
 
                 <div class="realtive w-full lg:w-3/4 lg:px-3 flex flex-col ">
-                    <div class="w-full" style="padding:45.55% 0 0 0;position:relative;"><iframe
-                            class="bg-black aspect-16/9 " x-bind:src="src"
-                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                    <div class="w-full" style="padding:45.55% 0 0 0;position:relative;"><iframe class="bg-black aspect-16/9 w-full"
+                            x-bind:src="src" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
                     <script src="https://player.vimeo.com/api/player.js"></script>
                     <div class="w-full border-2 h-20 p-3 flex flex-row">
@@ -19,12 +18,11 @@
                         </div>
 
                         <div class="w-1/3 m-auto">
-                            <a href="{{ $diploma->zoomLink->link ?? '' }}" class="flex flex-row" target="blank">
+                            <a href="{{$diploma->zoomLink->link ?? ''}}" class="flex flex-row" target="blank">
 
-                                <svg class="md:w-10 xl:w-15" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 1329.08 1329.08" shape-rendering="geometricPrecision"
-                                    text-rendering="geometricPrecision" image-rendering="optimizeQuality"
-                                    fill-rule="evenodd" clip-rule="evenodd">
+                                <svg class="md:w-10 xl:w-15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1329.08 1329.08"
+                                    shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+                                    image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
                                     <defs>
                                         <style>
                                             .fil1 {
@@ -57,8 +55,9 @@
                 </div>
                 <div>
                     {{-- playlist --}}
-                    <section>
-                        <div class="relative invisible md:visible  text-center  bg-white overflow-y-scroll ">
+                    <section >
+                        <div
+                            class="absolute ml-6 invisible md:visible  text-center right-5  lg:w-1/4 bg-transparent overflow-y-scroll ">
 
                             <h2 class="mb-3 text-lg border-2 border-gray-400 rounded-sm">
                                 Contenido del Curso
@@ -78,11 +77,12 @@
                                         x-transition.duration.200ms>
                                         <ol class="list-decimal ">
                                             @if ($subject->videos()->count() == 0)
-                                                <span class="p-3 truncate   w-full">
-                                                    Aún no hay videos en esta sección
-                                                </span>
-                                            @endif
+                                            <span class="p-3 truncate   w-full">
+                                                Aún no hay videos en esta sección
+                                            </span>
+                                        @endif
                                             @foreach ($subject->videos() as $key => $video)
+
                                                 <button
                                                     x-on:click="src = '{{ $video->iframe }}' , title='{{ $video->name }}'"
                                                     class="p-1 border-2 w-full border-gray-600 truncate cursor-pointer">
@@ -165,8 +165,7 @@
 
                                             <div class="list divided " x-data="{ selected: null }">
                                                 @foreach ($diploma->subjects() as $key => $subject)
-                                                    <div
-                                                        class=" bg-primary text-lg w-full my-1 rounded-md  text-white ">
+                                                    <div class=" bg-primary text-lg w-full my-1 rounded-md  text-white ">
                                                         <div class="body">
                                                             <p class="p-3 text-sm item cursor-pointer"
                                                                 x-on:click="selected !== {{ $key }} ? selected = {{ $key }} : selected = null">

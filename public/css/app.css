@@ -1400,6 +1400,9 @@ select {
 .w-3 {
   width: 0.75rem;
 }
+.w-2\/3 {
+  width: 66.666667%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1649,6 +1652,9 @@ select {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-scroll {
+  overflow: scroll;
 }
 .overflow-x-auto {
   overflow-x: auto;

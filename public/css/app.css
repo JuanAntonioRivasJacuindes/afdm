@@ -1248,6 +1248,9 @@ select {
 .mb-12 {
   margin-bottom: 3rem;
 }
+.ml-5 {
+  margin-left: 1.25rem;
+}
 .box-border {
   box-sizing: border-box;
 }
@@ -3537,6 +3540,18 @@ select {
 
   .lg\:w-1\/6 {
     width: 16.666667%;
+  }
+
+  .lg\:w-4\/12 {
+    width: 33.333333%;
+  }
+
+  .lg\:w-3\/12 {
+    width: 25%;
+  }
+
+  .lg\:w-3\/4 {
+    width: 75%;
   }
 
   .lg\:max-w-lg {

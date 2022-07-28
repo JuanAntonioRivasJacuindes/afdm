@@ -5,7 +5,7 @@
 
             <section class="w-full flex flex-col lg:flex-row bg-gray-100">
 
-                <div class="w-full lg:w-8/12 flex flex-col">
+                <div class=" lg:w-3/4 px-3 flex flex-col">
                     <div class="" style="padding:45.55% 0 0 0;position:relative;"><iframe class="bg-black aspect-16/9"
                             x-bind:src="src" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
@@ -54,9 +54,10 @@
                     </div>
                 </div>
                 <div>
+                    {{-- playlist --}}
                     <section>
                         <div
-                            class="absolute invisible md:visible  text-center right-5  lg:w-1/3 pl-4      bg-transparent overflow-y-scroll ">
+                            class="absolute ml-6 invisible md:visible  text-center right-5  lg:w-1/4 bg-transparent overflow-y-scroll ">
 
                             <h2 class="mb-3 text-lg border-2 border-gray-400 rounded-sm">
                                 Contenido del Curso

@@ -6,7 +6,7 @@
             <section class="w-full flex flex-col lg:flex-row bg-gray-100">
 
                 <div class="w-full lg:w-8/12 flex flex-col">
-                    <div class="aspect-16/9" style="padding:45.55% 0 0 0;position:relative;"><iframe
+                    <div class="bg-black aspect-16/9" style="padding:45.55% 0 0 0;position:relative;"><iframe
                             x-bind:src="src" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
                     <script src="https://player.vimeo.com/api/player.js"></script>

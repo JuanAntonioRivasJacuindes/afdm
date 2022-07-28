@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Inscription;
-
+use Illuminate\Support\Facades\Auth;
 class ActivePayment
 {
     /**
@@ -18,8 +18,8 @@ class ActivePayment
     public function handle(Request $request, Closure $next)
     {
        $inscription = Inscription::find($request->inscription_id);
-        if($inscription->allowAccess()){
 
+        if($inscription->allowAccess() && $inscription->user_id == Auth::user()->id){
             return $next($request);
         }else{
             abort(403);

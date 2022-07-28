@@ -5,7 +5,7 @@
 
             <section class="w-full flex flex-col lg:flex-row bg-gray-100">
 
-                <div class=" lg:w-3/4 px-3 flex flex-col">
+                <div class="realtive lg:w-3/4 px-3 flex flex-col">
                     <div class="" style="padding:45.55% 0 0 0;position:relative;"><iframe class="bg-black aspect-16/9"
                             x-bind:src="src" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>

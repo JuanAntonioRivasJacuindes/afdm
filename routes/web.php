@@ -41,6 +41,12 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 
 //     return $img->response('webp');
 // });
+Route::prefix('aux')->group(function(){
+    Route::get('select-video',function ()
+    {
+        return view('auxiliar.select-video');
+    })->name('select.video');
+});
 Route::prefix('coordination')->middleware(['permission:manage_content'])->group(function () {
     Route::get('/', [AdminController::class, 'coordinatorPanel'])->middleware('auth')->name('coordination');
     Route::get('/diploma/inscriptions', [DiplomaController::class,'inscription'])->name('diploma.inscriptions');

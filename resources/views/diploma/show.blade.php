@@ -1,12 +1,12 @@
 <x-app-layout>
 
     <div class="w-full md:my-7  md:p-5">
-        <div x-data="{ src: '(/)', title: 'Seleccione un video' }">
+        <div x-data="{ src: '{{route('select.video')}}', title: 'Seleccione un video' }">
 
             <section class="w-full flex flex-col lg:flex-row bg-gray-100">
 
                 <div class="w-full lg:w-8/12 flex flex-col">
-                    <div class="aspect-16/9" style="padding:45.55% 0 0 0;position:relative;"><iframe
+                    <div class="" style="padding:45.55% 0 0 0;position:relative;"><iframe class="bg-black aspect-16/9"
                             x-bind:src="src" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
                     <script src="https://player.vimeo.com/api/player.js"></script>
@@ -56,9 +56,9 @@
                 <div>
                     <section>
                         <div
-                            class="absolute invisible md:visible md:fixed text-center right-5   lg:w-1/4   bg-gray-100 overflow-y-scroll ">
+                            class="absolute invisible md:visible  text-center right-5  lg:w-1/3 pl-4      bg-transparent overflow-y-scroll ">
 
-                            <h2 class="my-3 text-lg border-2 border-gray-400 rounded-sm">
+                            <h2 class="mb-3 text-lg border-2 border-gray-400 rounded-sm">
                                 Contenido del Curso
                             </h2>
                             <div class="list divided " x-data="{ selected: null }">
@@ -74,11 +74,17 @@
 
                                     <div x-show="selected == {{ $key }}" class=""
                                         x-transition.duration.200ms>
-                                        <ol class="list-decimal text-left">
+                                        <ol class="list-decimal ">
+                                            @if ($subject->videos()->count() == 0)
+                                            <span class="p-3 truncate   w-full">
+                                                Aún no hay videos en esta sección
+                                            </span>
+                                        @endif
                                             @foreach ($subject->videos() as $key => $video)
+
                                                 <button
                                                     x-on:click="src = '{{ $video->iframe }}' , title='{{ $video->name }}'"
-                                                    class="p-1 border-2 border-gray-600 truncate cursor-pointer">
+                                                    class="p-1 border-2 w-full border-gray-600 truncate cursor-pointer">
                                                     {{ $key + 1 }}.- {{ $video->name }}
                                                 </button>
                                             @endforeach
@@ -167,12 +173,11 @@
                                                         </div>
                                                     </div>
 
-                                                    <div x-show="selected == {{ $key }}" class=""
+                                                    <div x-show="selected == {{ $key }}" class="w-full"
                                                         x-transition.duration.200ms>
-                                                        <ol class="list-decimal text-left">
+                                                        <ol class="list-decimal ">
                                                             @if ($subject->videos()->count() == 0)
-                                                                <span
-                                                                    class="p-1 border-2 border-gray-600 truncate  w-full">
+                                                                <span class="p-3 truncate  w-full">
                                                                     Aún no hay videos en esta sección
                                                                 </span>
                                                             @endif

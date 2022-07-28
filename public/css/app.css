@@ -3405,6 +3405,11 @@ select {
     padding-bottom: 1.5rem;
   }
 
+  .lg\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
   .lg\:pl-10 {
     padding-left: 2.5rem;
   }

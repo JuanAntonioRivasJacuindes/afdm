@@ -76,6 +76,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Inscription::class);
     }
+    public function findInscription($product_id)
+    {
+        return Inscription::where('user_id',$this->id)
+        ->where('product_id',$product_id)
+        ->first();
+        # code...
+    }
     public function payments()
     {
         return $this->hasManyThrough(MonthlyPayment::class, Inscription::class);

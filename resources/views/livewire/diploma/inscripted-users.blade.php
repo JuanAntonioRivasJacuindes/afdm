@@ -61,20 +61,17 @@
                                         <tr>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Name
+                                                Nombre
                                             </th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Title
+                                                Estatus
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Status
+                                                class="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Pagos Registrados
                                             </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Role
-                                            </th>
+
                                             <th scope="col" class="relative px-6 py-3">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -82,9 +79,9 @@
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($users as $user)
-
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                        <tr class="hover:bg-slate-200">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                    <a href="{{ route('user.show', $user->id) }}">
                                                     <div class="flex items-center">
                                                         <div class="flex-shrink-0 h-10 w-10">
                                                             <img class="h-10 w-10 rounded-full"
@@ -99,24 +96,24 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </a>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-sm text-gray-900">inscrito
-                                                    </div>
 
-                                                </td>
+
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <span
                                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                         Activo
                                                     </span>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{ $user->role ?? 'no hay rol asignado ' }}
+                                                <td class="px-6 py-4 text-center">
+                                                    <div class="text-sm text-gray-900">{{$user->findInscription($diploma->product->id)->payments->count()}}
+                                                    </div>
+
                                                 </td>
+
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="{{ route('user.show', $user->id) }}"
-                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+
                                                 </td>
                                             </tr>
                                         @endforeach

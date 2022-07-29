@@ -7,9 +7,10 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
-
+use Laravel\Jetstream\ConfirmsPasswords;
 class MonthlyPayments extends Component
 {
+    use ConfirmsPasswords;
     use WithFileUploads;
     public $user_id;
     public $user_inscriptions;
@@ -63,5 +64,11 @@ class MonthlyPayments extends Component
         $this->amount="";
 
         session()->flash('message', 'Pago Registrado.');
+    }
+    public function delete(MonthlyPayment $monthlyPayment)
+    {
+        $this->ensurePasswordIsConfirmed();
+        $monthlyPayment->delete();
+        session()->flash('message', 'Pago Eliminado.');
     }
 }

@@ -63,6 +63,8 @@
                         <th>Monto</th>
                         <th>Estatus</th>
                         <th>Expira</th>
+                        <th>Eliminar</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +75,13 @@
                         <td>{{$payment->amount ?? 'no disponible'}}</td>
                         <td>{{$payment->status_id ?? 'no disponible'}}</td>
                         <td>{{$payment->expires_at ?? 'no disponible'}}</td>
+                        <td>
+                        <x-jet-confirms-password wire:then="delete({{$payment->id}})">
+                            <x-jet-danger-button type="button" wire:loading.attr="disabled">
+                                Eliminar
+                            </x-jet-danger-button>
+                        </x-jet-confirms-password>
+                        </td>
 
                     </tr>
                     @endforeach

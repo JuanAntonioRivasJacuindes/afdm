@@ -53,7 +53,7 @@ Route::prefix('coordination')->middleware(['permission:manage_content'])->group(
 });
 
 
-Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment')->name('diploma.show');
+Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
 //end Admin Routes
 Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
 

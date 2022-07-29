@@ -55,13 +55,13 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">inscrito
+                                        <div class="text-sm text-gray-900 truncate ">Inscrito en :
                                         </div>
-                                        <div class="text-sm text-gray-500">Optimization</div>
+                                        <div class="text-sm text-gray-500 w-20  truncate hover:text-clip">{{$user->inscriptions->last()->product->name ?? 'no inscrito'}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 z-0">
                                            Activo
                                         </span>
                                     </td>

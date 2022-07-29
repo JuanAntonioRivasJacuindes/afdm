@@ -19,7 +19,7 @@
             <div class="p-4 w-full sm:w-1/2 lg:w-1/4 border-b border-solid border-gray-300 md:border-b-0 sm:border-r">
                 <span class="text-xs font-medium text-gray-500 uppercase">Total de diplomados</span>
                 <div class="py-4 flex items-center justify-center text-center">
-                    <span class="mr-4 text-3xl">{{$diplomas->count()}}</span>
+                    <span class="mr-4 text-3xl">{{ $diplomas->count() }}</span>
                     <!-- <span
                         class="inline-flex items-center bg-green-500 h-6 px-2 rounded text-white text-xs">00</span> -->
                 </div>
@@ -88,7 +88,7 @@
 
                             </th>
                             <th
-                            class="
+                                class="
                        w-1/6
 
                        text-lg
@@ -99,14 +99,13 @@
                        px-3
                        lg:px-4
                        ">
-                            Opciones
+                                Opciones
 
-                        </th>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($diplomas as $diploma)
-
                             <tr>
                                 <td
                                     class="
@@ -118,12 +117,12 @@
                                     bg-[#F3F6FF]
                                     border-b border-l border-[#E8E8E8]
                                     ">
-                                        {{ $diploma->name }}
+                                    {{ $diploma->name }}
 
-                                    <form action="{{ route('diploma.edit',['diploma'=>$diploma->id ]) }}" method="get">
+                                    <form action="{{ route('diploma.edit', ['diploma' => $diploma->id]) }}"
+                                        method="get">
                                         <input type="hidden" name="id" value="{{ $diploma->id }}">
-                                        <button
-                                            class="text-blue-500 hover:text-blue-700">{{ $diploma->title }}</button>
+                                        <button class="text-blue-500 hover:text-blue-700">{{ $diploma->title }}</button>
                                     </form>
 
                                 </td>
@@ -150,14 +149,13 @@
                            bg-[#F3F6FF]
                            border-b border-[#E8E8E8]
                            ">
-                                    Suscriptores
+                                  {{$diploma->product->suscribedUsers()->count()}}
                                 </td>
-                                <td >
+                                <td>
 
                                     @livewire('diploma.delete-diploma-button', ['diploma_id' => $diploma->id])
                                 </td>
                             </tr>
-
                         @endforeach
                     </tbody>
                 </table>
@@ -173,7 +171,8 @@
 </div>
 
 
-<div id="modalCreateDiploma" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
+<div id="modalCreateDiploma"
+    class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4">
     <div class="relative top-40 mx-auto shadow-lg rounded-md bg-white max-w-md">
 
         <!-- Modal header -->
@@ -183,7 +182,7 @@
         </div>
 
         <!-- Modal body -->
-       @livewire('diploma.create-diploma-form')
+        @livewire('diploma.create-diploma-form')
 
         <!-- Modal footer -->
 

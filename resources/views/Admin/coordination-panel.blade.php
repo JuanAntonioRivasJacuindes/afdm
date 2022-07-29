@@ -37,19 +37,32 @@
                                 Diplomados
                             </header>
                             <section class=" flex flex-row flex-wrap items-center text-center border-b border-solid border-gray-300">
-                                <ul class="m-5 text-left w-full">
-                                    @foreach ($diplomas as $diploma)
-                                    <a  href="{{route('diploma.inscriptions',['diploma_id'=>$diploma->id])}}">
+                                <table class=" w-full">
+                                    <thead>
+                                        <tr class="bg-gray-300 m-2">
+                                            <th>Nombre</th>
+                                            <th>Inscritos</th>
+                                            <th>Estatus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($diplomas as $diploma)
+                                        <tr class="border-2 my-1 hover:bg-slate-300">
+                                            <td class=" text-left truncate w-2">
+                                                <a  href="{{route('diploma.inscriptions',['diploma_id'=>$diploma->id])}}">
+                                                    {{$diploma->title ??'no definido'}}
+                                                </a>
+                                            </td>
 
-                                        <li class="w-full my-3 bg-gray-200 p-2 border-2 rounded-sm hover:bg-slate-300">
+                                            <td>{{$diploma->product->suscribedUsers()->count() ?? 'no definido'}}</td>
+                                            <td>{{$diploma->status->name ?? 'no definido'}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
 
 
-                                                {{$diploma->title ??'no definido'}}
 
-                                        </li>
-                                    </a>
-                                    @endforeach
-                               </ul>
 
 
                             </section>

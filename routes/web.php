@@ -33,6 +33,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 //Admin Routes
 Route::prefix('admin')->middleware(['permission:manage_system'])->group(function () {
     Route::get('/', [AdminController::class, 'adminPanel'])->middleware('auth')->name('admin');
+    Route::get('/2', [AdminController::class, 'adminPanel2'])->middleware('auth')->name('admin2');
 
     Route::get('/install', [InstallController::class, 'install']);
 });

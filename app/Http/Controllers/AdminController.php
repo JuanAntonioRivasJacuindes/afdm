@@ -10,6 +10,10 @@ class AdminController extends Controller
     {
         return view('Admin.admin-panel');
     }
+    public function adminPanel2()
+    {
+        return view('Admin.admin-2');
+    }
     function coordinatorPanel()
     {
     $diplomas = Diploma::all();

@@ -25,12 +25,12 @@
         <div class="flex flex-col  md:flex-row text-left ">
             <div class="flex flex-col w-full  md:w-1/5  m-auto">
                 <label  for="amount">Monto</label>
-                <input type="text" wire:model="amount" id="amount" placeholder="Monto">
+                <input type="text" wire:model.defer="amount" id="amount" placeholder="Monto">
             </div>
             <div class="flex flex-col w-full md:w-1/5 m-auto">
 
                 <label  for="inscription_id" >Inscripción</label>
-                <select id="inscription_id"  wire:model="inscription_id" name="inscription_id" id="">
+                <select id="inscription_id"  wire:model.defer="inscription_id" name="inscription_id" id="">
                 @foreach ($user_inscriptions as $inscription)
                     <option value="{{$inscription->id}}">{{$inscription->product->name}}</option>
                 @endforeach
@@ -46,7 +46,7 @@
             </div>
             <div class="flex flex-col w-full md:w-1/5  m-auto">
                 <label for="expires_at">Fecha de Vencimiento</label>
-                <input type="date" id="expires_at" wire:model="expires_at">
+                <input type="date" id="expires_at" wire:model.defer="expires_at">
             </div>
         </div>
         <div  wire:loading.remove>

@@ -35,7 +35,7 @@
                         <div class="flex flex-row">
 
                             <input required list="users" class="p-2 my-2 rounded-lg w-full mr-2" type="text" placeholder="Usuario"
-                            wire:model="addUserId">
+                            wire:model.lazy="addUserId">
                             <datalist class="bg-gray-700" id="users">
                                 @foreach ($allUsers as $userx)
                                 <option value="{{ $userx->id }}">{{ $userx->email }}</option>

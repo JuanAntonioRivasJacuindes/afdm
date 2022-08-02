@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOY=/home/desarrollo/test.afodemy.com/
+    - export DEPLOY=/home/desarrollo/test3.afodemy.com/
     - export FILE=/home/desarrollo/test_afodemy/
 
 

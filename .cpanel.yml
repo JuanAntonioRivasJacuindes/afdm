@@ -9,7 +9,7 @@ deployment:
 
 
     - /bin/cp -R ./ $FILE
-    - /bin/cp -r `ls -A | grep -v "public"` $PUBTEST
+    - /bin/cp -r 'ls -A | grep -v "public"' $PUBTEST
     - /bin/rsync -av --exclude='index.php' public/ $DEPLOY
 
 

@@ -1,10 +1,17 @@
 <div class="w-full shadow-lg">
+    <div class="m-3">
+        <label for="roleToCreate">Crear Rol</label>
+        <input type="text" wire:model.defer="roleToCreate" placeholder="Nombre">
+        <x-jet-button wire:click="createRole">Crear</x-jet-button>
+    </div>
 
-    <div>
+    <div class="m-3">
         <label for="permissionToCreate">Crear Permiso</label>
-        <input type="text" wire:model="permissionToCreate" placeholder="Nombre">
+        <input type="text" wire:model.defer="permissionToCreate" placeholder="Nombre">
         <x-jet-button wire:click="createPermission">Crear</x-jet-button>
     </div>
+
+    <hr class="m-3">
 
     <div class="w-full flex flex-row">
 

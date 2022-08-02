@@ -13,6 +13,8 @@ class RolesAndPerms extends Component
     public $selectedPermName;
 
     public $permissionToCreate;
+    public $roleToCreate;
+
 
     public $selectedRole;
     public $selectedPerm;
@@ -43,11 +45,7 @@ class RolesAndPerms extends Component
         return view('livewire.roles.roles-and-perms');
     }
 
-    public function createRole($name)
-    {
-        $role = Role::create(['name' => $name]);
-        # code...
-    }
+
     public function revokePerm($name)
     {
 
@@ -62,7 +60,14 @@ class RolesAndPerms extends Component
     public function createPermission()
     {
      Permission::create(['name' => $this->permissionToCreate]);
-        $this->permissionToCreate="";
+     $this->permissionToCreate="";
         # code...
     }
+    public function createRole()
+    {
+        Role::create(['name' => $this->roleToCreate]);
+        $this->roleToCreate="";
+        # code...
+    }
+
 }

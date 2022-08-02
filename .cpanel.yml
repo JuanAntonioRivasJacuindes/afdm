@@ -9,6 +9,6 @@ deployment:
 
 
     - /bin/cp -R ./ $FILE
-    - /bin/rsync -ar --exclude='index.php' public/ $DEPLOY
+    - /bin/cp -ar --exclude='index.php' public/ $DEPLOY
 
 

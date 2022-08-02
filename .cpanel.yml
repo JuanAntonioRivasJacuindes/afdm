@@ -4,12 +4,11 @@ deployment:
     - export DEPLOY=/home/desarrollo/test.afodemy.com/
     - export FILE=/home/desarrollo/test_afodemy/
 
-    - export PUBTEST=/home/desarrollo/pubtest.afodemy.com/
+
 
 
 
     - /bin/cp -R ./ $FILE
-    - /bin/cp -r 'ls -A | grep -v "public"' $PUBTEST
     - /bin/rsync -av --exclude='index.php' public/ $DEPLOY
 
 

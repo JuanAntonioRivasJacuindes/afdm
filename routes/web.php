@@ -6,6 +6,7 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstallController;
+use App\Http\Controllers\TeacherInfoController;
 
 
 use App\Models\User;
@@ -16,6 +17,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
 use Spatie\Permission\Models\Permission;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -36,6 +38,12 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 
     Route::get('/install', [InstallController::class, 'install']);
 });
+Route::prefix('forms')->group(function () {
+    Route::get('/register-teacher-info', [FormController::class, 'registerTeacherInfo'])->name('form.register.teacher.info');
+
+});
+Route::resource('teacher-info', TeacherInfoController::class);
+
 Route::get('image', function() {
     $img = Image::make('storage\course\flyers\7CqDEXkDyqazRVK8SNX0NGvxdZZ8qckBhM3zk33H.png')->resize(200, 200);
 

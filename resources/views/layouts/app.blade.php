@@ -24,7 +24,7 @@
   gtag('config', 'G-ZH8ZR0M83Z');
 </script>
 
-        <title>{{ config('app.name', 'Afodemy') }}</title>
+        <title>Cursos y Diplomados | Afodemy</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

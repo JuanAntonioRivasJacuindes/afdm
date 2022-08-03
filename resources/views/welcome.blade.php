@@ -112,7 +112,7 @@
             <div id="sync2" class="owl-carousel owl-theme my-2">
                 @foreach ($diplomas as $diploma)
                     <div class="item hover:bg-black my-1">
-                        <img class="brightness-50" src="{{ $diploma->flyer_url() }}" alt="">
+                        <img class="brightness-50" src="{{ $diploma->flyer_thumbnail() }}" alt="">
                     </div>
                 @endforeach
 

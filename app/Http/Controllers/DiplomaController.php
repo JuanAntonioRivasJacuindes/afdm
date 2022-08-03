@@ -12,7 +12,7 @@ use Spatie\Permission\Models\Permission;
 use App\Models\Revoe;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
+use Intervention\Image\ImageManagerStatic as Image;
 class DiplomaController extends Controller
 {
     /**
@@ -77,10 +77,15 @@ class DiplomaController extends Controller
         //         'description' => 'Descripcion Largaasdasdasdardasdgsdgfadsfga',
         //     ],
         // ]);
+        // Creacion del Thumbnail
+        $originalFlyer=$request->flyer->store('public/course/flyers');
+
+        ImageController::createThumbnail($originalFlyer,300,300);
+        //Creacion del registro
         $diploma =  Diploma::create([
             'title' => $request->title,
             'description' => $request->description,
-            'flyer' => $request->flyer->store('public/course/flyers'),
+            'flyer' => $originalFlyer,
             'poster' => $request->poster->store('public/course/posters'),
             'stripe_id' => 'no_stripe',
             'status_id' => 2,
@@ -91,7 +96,7 @@ class DiplomaController extends Controller
             ])->id,
             'product_id' => $local_product->id,
         ]);
-        $revoe = Revoe::create([
+        Revoe::create([
             'key' => $request->revoe,
             'register_date' => $request->register_date,
             'diploma_id' => $diploma->id,
@@ -116,9 +121,13 @@ class DiplomaController extends Controller
         if (Storage::exists($diploma->flyer)) {
             Storage::delete($diploma->flyer);
         }
-
+        if (Storage::exists($diploma->flyer_thumbnail())) {
+            Storage::delete($diploma->flyer_thumbnail());
+        }
+        $newFlyer = $request->flyer->store('public/course/flyers');
+        ImageController::createThumbnail($newFlyer,300,300);
         $diploma->update([
-            'flyer' => $request->flyer->store('public/course/flyers'),
+            'flyer' => $newFlyer,
         ]);
         return back();
     }

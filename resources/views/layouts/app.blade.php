@@ -14,14 +14,14 @@
         <meta property="og:site_name" content="Afodemy" />
         <meta property="og:locale" content="es_MX" />
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TLRH72C2ZZ"></script>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZH8ZR0M83Z"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-TLRH72C2ZZ');
+  gtag('config', 'G-ZH8ZR0M83Z');
 </script>
 
         <title>{{ config('app.name', 'Afodemy') }}</title>

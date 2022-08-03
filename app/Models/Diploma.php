@@ -42,6 +42,10 @@ class Diploma extends Model
     {
         return str_replace("public", "storage", asset($this->attributes['flyer']));
     }
+    public function flyer_thumbnail()
+    {
+        return str_replace("public/course/flyers", "storage/course/flyers/thumbnails", asset($this->attributes['flyer']));
+    }
     public function poster_url()
     {
         return str_replace("public", "storage", asset($this->attributes['poster']));

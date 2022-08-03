@@ -36,11 +36,11 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 
     Route::get('/install', [InstallController::class, 'install']);
 });
-// Route::get('image', function() {
-//     $img = Image::make('storage/course/flyers/bTEXpNSmBIjbZkg98ASAN5hIITM21QVtupNPwh32.jpg')->resize(200, 200);
+Route::get('image', function() {
+    $img = Image::make('storage\course\flyers\7CqDEXkDyqazRVK8SNX0NGvxdZZ8qckBhM3zk33H.png')->resize(200, 200);
 
-//     return $img->response('webp');
-// });
+    return $img->response('webp');
+});
 Route::prefix('aux')->group(function(){
     Route::get('select-video',function ()
     {

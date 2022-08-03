@@ -24,16 +24,13 @@
             @foreach ($user->inscriptions as $pucharse)
 
                 <a href="{{ route('diploma.show', ['product_id' => $pucharse->product->id ,'inscription_id' => $pucharse->id]) }}"
-                    class="hover:shadow-2xl  duration-700 w-full bg-white flex mx-auto  md:my-5  flex-wrap items-center sm:-mx-3 shadow-md">
-                    <img class="w-20" src="{{$pucharse->product->productType()->flyer_thumbnail() }}" alt="">
-                    <div class="   md:w-1/2 md:px-3 px-5  flex items-center">
-                        <h1 class="text:sm   uppercase  lg:text-lg font-extrabold tracking-tight text-gray-600 md:text-md">
-                            <span class="block xl:inline">{{ $pucharse->product->name ??''}}</span>
+                    class="hover:shadow-lg  duration-300 w-full bg-white flex mx-auto  md:my-5  flex-wrap items-center sm:-mx-3 shadow-md">
+                    <div class="   md:w-1/2 md:px-3 px-5  flex flex-row items-center">
+                        <img class="w-20" src="{{$pucharse->product->productType()->flyer_thumbnail() }}" alt="">
+                        <h1 class="text:sm m-5 uppercase  lg:text-lg font-extrabold tracking-tight text-gray-600 md:text-md">
+                            <span >{{ $pucharse->product->name ??''}}</span>
                         </h1>
                     </div>
-
-                    <hr>
-                    <br>
                 </a>
             @endforeach
 

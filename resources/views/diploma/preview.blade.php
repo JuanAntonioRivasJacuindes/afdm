@@ -253,29 +253,20 @@
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-
-
+                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                        <h2 class="text-white text-lg title-font font-medium mb-2">Certificado</h2>
-                        <p class="leading-relaxed text-base">Un Certificado con validez oficial, nacional e internacional, mismo que tiene su propia constancia de acreditación ante la secretaria de educación superior y secretaria de innovación, ciencia y tecnología, el cual puede ser apostillado .</p>
+                        <h2 class="text-white text-lg title-font font-medium mb-2">Grabaciones</h2>
+                        <p class="leading-relaxed text-base">Acceso durante medio año a las grabaciones del curso con
+                            la finalidad de reforzar conocimientos.</p>
 
                     </div>
                 </div>
                 <div
                     class="flex items-center lg:w-full mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
-                    <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                        <h2 class="text-white text-lg title-font font-medium mb-2">Diploma</h2>
-                        <p class="leading-relaxed text-base">Un Diploma digital que acredita los conocimientos
-                            adquiridos en el diplomado</p>
-
-                    </div>
                     <div
-                        class="sm:w-32 sm:order-none order-first sm:h-32 h-20 w-20 sm:ml-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-primary flex-shrink-0">
+                        class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-primary flex-shrink-0">
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
 
@@ -287,21 +278,32 @@
 
                         </svg>
                     </div>
+                    <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                        <h2 class="text-white text-lg title-font font-medium mb-2">Diploma</h2>
+                        <p class="leading-relaxed text-base">Un Diploma digital que acredita los conocimientos
+                            adquiridos en el diplomado.</p>
+
+                    </div>
+
                 </div>
 
                 <div class="flex items-center lg:w-full mx-auto sm:flex-row flex-col">
                     <div
                         class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-primary flex-shrink-0">
+
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+
+
                         </svg>
                     </div>
                     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                        <h2 class="text-white text-lg title-font font-medium mb-2">Grabaciones</h2>
-                        <p class="leading-relaxed text-base">Acceso durante medio año a las grabaciones del curso con
-                            la finalidad de reforzar conocimientos.</p>
+                        <h2 class="text-white text-lg title-font font-medium mb-2">Certificado</h2>
+                        <p class="leading-relaxed text-base">Un Certificado con validez oficial <small>*costo adicional</small>, nacional e internacional, mismo que tiene su propia constancia de acreditación ante la secretaria de educación superior y secretaria de innovación, ciencia y tecnología, el cual puede ser apostillado .</p>
 
                     </div>
                 </div>

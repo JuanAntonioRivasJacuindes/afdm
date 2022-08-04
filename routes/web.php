@@ -131,6 +131,9 @@ Route::prefix('resources')->group(function () {
     Route::get('calendario-dacti', function () {
         return response()->download('storage/downloadable-resources/CALENDARIO DACTILOSCOPIA.pdf');
     });
+     Route::get('aviso-privacidad', function () {
+        return response()->download('storage/downloadable-resources/Aviso_de_Privacidad.pdf');
+    })->name('download.privacy');
 });
 Route::get('view-session', function () {
     return view('student.diploma.index');

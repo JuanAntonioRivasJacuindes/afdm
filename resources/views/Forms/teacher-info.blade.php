@@ -81,7 +81,7 @@
                         <input class="rounded-sm " type="file" name="cedula" id="cedula"required>
                     </div>
                     <div class="flex flex-col mx-auto my-2">
-                        <label for="terms">Aviso de privacidad Firmado: <a href="" class="text-primary"><i>Descargar Aquí</i></a></label>
+                        <label for="terms">Aviso de privacidad Firmado: <a href="{{route('download.privacy')}}" class="text-primary"><i>Descargar Aquí</i></a></label>
                         <input class="rounded-sm " type="file" name="terms" id="terms"required>
                     </div>
                     <div class="flex flex-col mx-auto my-5 text-center">

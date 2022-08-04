@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Diploma;
+use App\Models\TeacherInfo;
+
 class AdminController extends Controller
 {
     public function adminPanel()
     {
-        return view('Admin.admin-panel');
+        $teachers = TeacherInfo::all();
+        return view('Admin.admin-panel',compact('teachers'));
     }
     function coordinatorPanel()
     {

@@ -34,6 +34,13 @@
                             Roles y permisos
                         </a>
                     </li>
+                    <li class="ml-1">
+                        <a href="#" @click.prevent="currentTab = 5"
+                            :class="currentTab === 5 ? 'bg-white' : 'bg-gray-100'"
+                            class="inline-flex justify-center items-center rounded-t py-4 px-6 font-medium transition">
+                           Profesores
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Tabs content -->
@@ -53,6 +60,10 @@
                 <div x-show="currentTab === 4"
                     class="flex flex-wrap w-full overflow-x-scroll bg-white p-6 rounded-b rounded-tr shadow-md">
                     <p class="leading-6">@livewire('roles.roles-and-perms')</p>
+                </div>
+                <div x-show="currentTab === 5"
+                    class="flex flex-wrap w-full overflow-x-scroll bg-white p-6 rounded-b rounded-tr shadow-md">
+                    <p class="leading-6">@include('teacher.index')</p>
                 </div>
             </div>
         </div>

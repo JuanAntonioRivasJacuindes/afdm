@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\TeacherInfoController;
-
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Diploma;
@@ -135,6 +135,10 @@ Route::prefix('resources')->group(function () {
         return response()->download('storage/downloadable-resources/Aviso_de_Privacidad.pdf');
     })->name('download.privacy');
 });
+Route::get('download', function (Request $request) {
+    return Storage::download($request->route);
+
+})->name('download');
 Route::get('view-session', function () {
     return view('student.diploma.index');
 });

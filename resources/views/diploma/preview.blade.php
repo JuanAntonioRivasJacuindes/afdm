@@ -22,7 +22,7 @@
                                         <img alt="flyer" class="w-full md:w-1/2  shadow-2xl"
                                             src="{{ asset($diploma->flyer_url()) }}">
                                         <div
-                                            class="sm:w-full md:w-1/2 p-5 md:p-10  relative  bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">
+                                            class="sm:w-full md:w-1/2 p-5 md:p-10   bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">
                                             {{-- Textos llamativos --}}
                                             <div class="text-justify">
                                                 {{-- <p class="mb-3">
@@ -52,17 +52,19 @@
 
 
 
-                                            <div class="flex flex-row my-5 bottom-2 w-full ">
+                                            <div class="flex flex-row my-5  w-full ">
                                                 @can($diploma->product->getPermissionName())
                                                     <form method="get">
                                                         <x-jet-button class=" ml-auto  py-2 px-6 ">Ir allá</x-jet-button>
                                                     </form>
                                                 @else
-                                                    <div class="text-white mx-auto">
+                                                    <div class="text-white mx-auto mb-2">
 
                                                         <a href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}"
                                                             class="bg-primary p-2 mx-3 rounded-lg w-full">Inscribirme</a>
-
+                                                            <a x-data="{id:'modal'}"
+                                                            x-on:click="$dispatch('modal-overlay',{id})"
+                                                                class="cursor-pointer bg-primary p-2 mx-3 rounded-lg w-full">Prefiero que me contacten</a>
                                                         <a href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}"
                                                             class="bg-primary p-2 mx-auto rounded-lg  w-full">Compartir</a>
                                                     </div>
@@ -208,7 +210,7 @@
                                                 x-transition:enter="transition delay-200 duration-500 transform ease-in"
                                                 x-transition:enter-start="opacity-0">
                                                 PAGO ÚNICO | $6,999 MXN <small>($375 USD)</small> <br>
-                                                INSCRIPCIÓN | $4,99 MXN <small>($30 USD)</small> <br>
+                                                INSCRIPCIÓN | $499 MXN <small>($30 USD)</small> <br>
                                                 MENSUALIDAD | $1,299 MXN <small>($77 USD)</small> <br>
                                                 CERTIFICACIÓN | $2,700 MXN <small>($165 USD)</small>
 
@@ -321,5 +323,5 @@
             menu.classList.toggle("hidden");
         });
     </script>
-
+    @livewire('modals.contact-advisor-modal')
 </x-app-layout>

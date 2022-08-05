@@ -53,11 +53,11 @@
 
 
                                             <div class="flex flex-row my-5  w-full ">
-                                                @can($diploma->product->getPermissionName())
+
                                                     <form method="get">
                                                         <x-jet-button class=" ml-auto  py-2 px-6 ">Ir allá</x-jet-button>
                                                     </form>
-                                                @else
+
                                                     <div class="text-white mx-auto mb-2">
 
                                                         <a href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}"
@@ -68,7 +68,7 @@
                                                         <a href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}"
                                                             class="bg-primary p-2 mx-auto rounded-lg  w-full">Compartir</a>
                                                     </div>
-                                                @endcan
+
                                             </div>
                                         </div>
                                     </div>

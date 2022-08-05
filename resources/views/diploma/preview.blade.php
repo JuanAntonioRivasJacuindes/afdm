@@ -1,15 +1,23 @@
 <x-app-layout>
 
 
-    @section('title',"Diplomado en $diploma->title")
-    @section('description',"$diploma->description" ?? 'Descripcion no disponible')
-    @section('route','https://user.afodemy.com')
-    @section('image', asset($diploma->flyer_url()))
+    @section('title', "Diplomado en $diploma->title")
+    @section('description', "$diploma->description" ?? 'Descripcion no disponible')
+    @section('route', 'https://user.afodemy.com')
+    @section('image', asset($diploma->flyer_thumbnail()))
 
 
 
     <div class="bg-gradient-to-b  from-gray-100 to-primary">
 
+        @if (Session::has('message'))
+        <div class="flex justify-between text-green-200 shadow-inner rounded p-3 bg-green-600">
+            <p class="self-center">
+                {{ Session::get('message') }}
+            </p>
+
+        </div>
+        @endif
         <section>
 
             <div class="min-h-screen hero-image bg-right-bottom bg-cover ">
@@ -18,16 +26,16 @@
                         <div class="w-full">
                             <section class=" body-font overflow-hidden">
                                 <div class="container w-full  ">
-                                    <div class="w-full  flex flex-wrap">
-                                        <img alt="flyer" class="w-full md:w-1/2  shadow-2xl"
-                                            src="{{ asset($diploma->flyer_url()) }}">
+                                    <div class="w-full  flex flex-col md:flex-row ">
+                                        <div class="w-full md:w-1/2">
+                                            <img alt="flyer" class="w-full   shadow-2xl"
+                                                src="{{ asset($diploma->flyer_thumbnail()) }}">
+                                        </div>
                                         <div
-                                            class="sm:w-full md:w-1/2 p-5 md:p-10   bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">
+                                            class="w-full md:w-1/2 p-5 md:p-10  bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">
                                             {{-- Textos llamativos --}}
                                             <div class="text-justify">
-                                                {{-- <p class="mb-3">
-                                                <span class="text-3xl">10</span> DE <span class="text-3xl">JULIO</span>
-                                            </p> --}}
+
                                                 <p class="mb-3">
                                                     <span class="text-xl">
                                                         DURACIÓN
@@ -38,12 +46,7 @@
                                                 <p class="text-2xl mb-3">
                                                     <b>4 HORAS</b> SEMANALES
                                                 </p>
-                                                {{-- <p class="mb-3">
-                                                HORARIO <br>
-                                                <b>DOMINGO</b><br>
-                                                <b>10:00</b> A <b>14:00</b> HORAS <br>
-                                                HORARIO DE MÉXICO
-                                            </p> --}}
+
                                                 <p>
                                                     UNA VEZ INSCRITOS, SE LES PROPORCIONARÁ EL CALENDARIO DE CLASES.
                                                 </p>
@@ -52,22 +55,29 @@
 
 
 
-                                            <div class="flex flex-row my-5  w-full ">
+                                            <div class=" mt-10 md:mt-40 mx-auto w-full ">
 
-                                                    <form method="get">
-                                                        <x-jet-button class=" ml-auto  py-2 px-6 ">Ir allá</x-jet-button>
+                                                {{-- <form method="get">
+                                                        <x-jet-button class=" w-full ">Ir allá</x-jet-button>
+                                                </form> --}}
+
+                                                <div class=" flex flex-col md:flex-row  w-full">
+                                                    <form class="w-full  " target="blank"
+                                                        action="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}">
+                                                        <x-jet-button class="w-full ">Contactar con un asesor
+                                                        </x-jet-button>
                                                     </form>
+                                                    <x-jet-button class="w-full " x-data="{ id: 'modal' }"
+                                                        x-on:click="$dispatch('modal-overlay',{id})">Prefiero que me
+                                                        contacten</x-jet-button>
 
-                                                    <div class="text-white mx-auto mb-2">
 
-                                                        <a href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}"
-                                                            class="bg-primary p-2 mx-3 rounded-lg w-full">Inscribirme</a>
-                                                            <a x-data="{id:'modal'}"
-                                                            x-on:click="$dispatch('modal-overlay',{id})"
-                                                                class="cursor-pointer bg-primary p-2 mx-3 rounded-lg w-full">Prefiero que me contacten</a>
-                                                        <a href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}"
-                                                            class="bg-primary p-2 mx-auto rounded-lg  w-full">Compartir</a>
-                                                    </div>
+                                                </div>
+
+                                                <form target="blank" class="w-full"
+                                                    action="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">
+                                                    <x-jet-button class="w-full ">Compartir</x-jet-button>
+                                                </form>
 
                                             </div>
                                         </div>
@@ -245,9 +255,10 @@
         <hr>
         <section class="text-white body-font">
             <div class="container px-5 py-24 mx-auto">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-white mb-20">Al Finalizar Este Curso
+                <h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-white mb-20">Al Finalizar Este
+                    Curso
                     <br class="hidden sm:block">Obtendrás
-                  </h1>
+                </h1>
                 <div
                     class="flex items-center lg:w-full mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col">
                     <div
@@ -272,11 +283,11 @@
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="2" class="sm:w-16 sm:h-16 w-10 h-10" viewBox="0 0 24 24">
 
-                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                                <path
-                                    d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
 
                         </svg>
                     </div>
@@ -305,7 +316,10 @@
                     </div>
                     <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                         <h2 class="text-white text-lg title-font font-medium mb-2">Certificado</h2>
-                        <p class="leading-relaxed text-base">Un Certificado con validez oficial <small>*costo adicional</small>, nacional e internacional, mismo que tiene su propia constancia de acreditación ante la secretaria de educación superior y secretaria de innovación, ciencia y tecnología, el cual puede ser apostillado .</p>
+                        <p class="leading-relaxed text-base">Un Certificado con validez oficial <small>*costo
+                                adicional</small>, nacional e internacional, mismo que tiene su propia constancia de
+                            acreditación ante la secretaria de educación superior y secretaria de innovación, ciencia y
+                            tecnología, el cual puede ser apostillado .</p>
 
                     </div>
                 </div>
@@ -323,5 +337,5 @@
             menu.classList.toggle("hidden");
         });
     </script>
-    @livewire('modals.contact-advisor-modal')
+    @livewire('modals.contact-advisor-modal', ['product_id' => $diploma->product->id])
 </x-app-layout>

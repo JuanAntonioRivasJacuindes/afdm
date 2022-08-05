@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\TeacherInfoController;
+use App\Http\Controllers\LeadController;
+
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
@@ -43,6 +45,7 @@ Route::prefix('forms')->group(function () {
 
 });
 Route::resource('teacher-info', TeacherInfoController::class);
+Route::resource('lead', LeadController::class);
 
 Route::get('image', function() {
     $img = Image::make('storage\course\flyers\7CqDEXkDyqazRVK8SNX0NGvxdZZ8qckBhM3zk33H.png')->resize(200, 200);

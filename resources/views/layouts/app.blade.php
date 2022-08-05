@@ -13,7 +13,7 @@
         <meta property="og:url" content="@yield('route')" />
         <meta property="og:site_name" content="Afodemy" />
         <meta property="og:locale" content="es_MX" />
-
+        @livewireScripts
      <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZH8ZR0M83Z"></script>
 <script>
@@ -65,7 +65,7 @@
 
         @stack('modals')
 
-        @livewireScripts
+
     </body>
 @include('partial.footer')
 </html>

@@ -62,22 +62,17 @@
                                                 </form> --}}
 
                                                 <div class=" flex flex-col md:flex-row  w-full">
-                                                    <form class="w-full  " target="blank"
-                                                        action="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}">
-                                                        <x-jet-button class="w-full ">Contactar con un asesor
-                                                        </x-jet-button>
-                                                    </form>
+                                                    <a target="blank" href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}" class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition">Contactar con un asesor</a>
+
+
                                                     <x-jet-button class="w-full " x-data="{ id: 'modal' }"
                                                         x-on:click="$dispatch('modal-overlay',{id})">Prefiero que me
                                                         contacten</x-jet-button>
 
 
                                                 </div>
+                                                <a target="blank" class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition" href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">Compartir</a>
 
-                                                <form target="blank" class="w-full"
-                                                    action="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">
-                                                    <x-jet-button class="w-full ">Compartir</x-jet-button>
-                                                </form>
 
                                             </div>
                                         </div>

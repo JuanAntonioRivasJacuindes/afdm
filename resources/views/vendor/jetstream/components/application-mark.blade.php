@@ -1,7 +1,4 @@
 
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generator: Adobe Illustrator 26.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-
 <svg
 style="width:10rem"
    version="1.1"

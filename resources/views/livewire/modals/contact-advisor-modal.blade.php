@@ -1,10 +1,8 @@
 <div>
     {{-- <x-jet-button   x-data="{id:'modal'}"
-    x-on:click="$dispatch('modal-overlay',{id})">Contactar un asesor  </x-jet-button> --}}
+    x-on:click="$dispatch('modal-overlay',{id})">Contactar un asesor</x-jet-button> --}}
     <section >
-
-
-        <div class="fixed inset-0 z-10 flex flex-col items-center justify-end overflow-y-auto bg-black bg-opacity-80 sm:justify-start"
+        <div class=" fixed inset-0 z-10 flex flex-col items-center justify-end overflow-y-auto bg-black bg-opacity-80 sm:justify-start"
             x-data="{ modal: false }" x-show="modal"
             x-on:modal-overlay.window="if ($event.detail.id == 'modal') modal=true"
             x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0"

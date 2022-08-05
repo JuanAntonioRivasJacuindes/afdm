@@ -1,7 +1,7 @@
 <div>
 
     <section  x-data="{ modal: false }">
-        <div class=" fixed inset-0 z-10 flex flex-col items-center justify-end overflow-y-auto bg-black bg-opacity-80 sm:justify-start"
+        <div class=" fixed inset-0 z-50 flex flex-col items-center justify-end overflow-y-auto bg-black bg-opacity-80 sm:justify-start"
             x-show="modal" x-on:modal-overlay.window="if ($event.detail.id == 'modal') modal=true"
             x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-500"

@@ -45,7 +45,7 @@ Route::prefix('forms')->group(function () {
 
 });
 Route::resource('teacher-info', TeacherInfoController::class);
-Route::resource('lead', LeadController::class);
+
 
 Route::get('image', function() {
     $img = Image::make('storage\course\flyers\7CqDEXkDyqazRVK8SNX0NGvxdZZ8qckBhM3zk33H.png')->resize(200, 200);
@@ -61,6 +61,7 @@ Route::prefix('aux')->group(function(){
 Route::prefix('coordination')->middleware(['permission:manage_content'])->group(function () {
     Route::get('/', [AdminController::class, 'coordinatorPanel'])->middleware('auth')->name('coordination');
     Route::get('/diploma/inscriptions', [DiplomaController::class,'inscription'])->name('diploma.inscriptions');
+    Route::resource('/lead', LeadController::class)->except(['store']);
 });
 
 
@@ -74,6 +75,7 @@ Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->na
 Route::resource('diploma', DiplomaController::class)->except(['show']);
 Route::post('diploma/update/flyer', [DiplomaController::class, 'updateFlyer'])->name('diploma.update.flyer');
 Route::post('diploma/update/poster', [DiplomaController::class, 'updatePoster'])->name('diploma.update.poster');
+Route::post('lead/store', [LeadController::class, 'store'])->name('lead.store');
 
 // Route::get('diploma/create', [DiplomaController::class, 'create'])->name('diploma.create');
 // Route::get('diploma/edit', [DiplomaController::class, 'edit'])->name('diploma.edit');

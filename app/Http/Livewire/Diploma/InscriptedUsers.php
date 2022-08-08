@@ -8,9 +8,12 @@ use App\Models\Diploma;
 use App\Models\Inscription;
 use Livewire\WithFileUploads;
 use PhpParser\Node\Stmt\TryCatch;
+use Laravel\Jetstream\ConfirmsPasswords;
+
 use Illuminate\Support\Facades\Auth;
 class InscriptedUsers extends Component
 {
+    use ConfirmsPasswords;
     public $users;
 
     public $selectedId;
@@ -64,6 +67,20 @@ class InscriptedUsers extends Component
             session()->flash('message', 'Este usuario ya está inscrito.');
 
         }
+    }
+    public function removeInscription($id_inscription)
+    {
+        $this->ensurePasswordIsConfirmed();
+        try {
+            //code...
+            Inscription::find($id_inscription)->delete();
+            session()->flash('message', 'Removido Éxitosamente.');
+        } catch (\Throwable $th) {
+
+            session()->flash('message', 'No Fue Posible, verifique que el usuario no tenga pagos registrados.');
+
+        }
+
     }
 
 }

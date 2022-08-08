@@ -122,7 +122,12 @@
 
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <td class="px-6 py-4 text-center">
+                                                    <x-jet-confirms-password wire:then="removeInscription({{$user->findInscription($diploma->product->id)->id}})">
+                                                        <div class="text-sm text-gray-900" wire:loading.attr="disabled"><x-jet-danger-button>Eliminar</x-jet-danger-button>
+                                                        </div>
+                                                    </x-jet-confirms-password>
+
 
                                                 </td>
                                             </tr>

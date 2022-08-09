@@ -78,6 +78,14 @@
                     </div>
                     <div class="bg-gray-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
+                            Generación
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{$diploma->generation ??'no definido'}}
+                        </dd>
+                    </div>
+                    <div class="bg-gray-100 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
                             Estatus
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -165,12 +173,28 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="revoe_key">
                             Revoe
                         </label>
-                        <input type="text" name="revoe" id="revoe_key" wire:model.lazy="revoe_key"><br>
+                        <input type="text" name="revoe" id="revoe_key" wire:model.defer="revoe_key"><br>
                         @error('title') <span class="error">
                                 <p class="text-red-500 text-xs italic">El revoe es obligatorio y no debe exceder los 22 caracteres
                                 </p>
                         </span><br> @enderror
                     </div>
+
+                    <select wire:model.defer="generation" id="">
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                        <option value="4">IV</option>
+                        <option value="5">V</option>
+                        <option value="6">VI</option>
+                        <option value="7">VII</option>
+                        <option value="8">VIII</option>
+                        <option value="9">IX</option>
+                        <option value="10">X</option>
+                    </select>
+
+
+
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
                             Descripción de 30 - 50 palabras

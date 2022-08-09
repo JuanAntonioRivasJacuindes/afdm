@@ -18,6 +18,7 @@ class Diploma extends Model
         'status_id',
         'date_id',
         'product_id',
+        'generation',
     ];
     public function date()
     {

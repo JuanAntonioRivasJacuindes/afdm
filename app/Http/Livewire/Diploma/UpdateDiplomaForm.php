@@ -26,6 +26,8 @@ class UpdateDiplomaForm extends Component
     public $revoe_date;
     public $revoe_key;
     public $zoomLink;
+    public $generation;
+
     public function update()
     {
 
@@ -34,12 +36,14 @@ class UpdateDiplomaForm extends Component
             'description' => 'required',
             'starts_at' => 'required',
             'ends_at' => 'required',
+
         ]);
 
         $this->diploma->update([
             'title' => $this->title,
             'description' => $this->description,
             'status_id' => $this->status_id,
+            'generation'=>$this->generation,
         ]);
         $this->diploma->date->update([
             'starts_at' => $this->starts_at,
@@ -80,6 +84,7 @@ class UpdateDiplomaForm extends Component
         $this->revoe = $this->diploma->revoe;
         $this->revoe_key = $this->revoe->key;
         $this->revoe_date=$this->revoe->register_date;
+        $this->generation=$this->diploma->generation;
     }
     public function render()
     {

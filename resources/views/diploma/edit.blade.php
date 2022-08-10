@@ -8,7 +8,7 @@
 
     {{-- @livewire('stripe.plans',['product_id'=>$diploma->product_id]) --}}
     @livewire('video.subject-videos',['diploma_id'=>$diploma->id])
-
+    @livewire('subproduct.index',['product_id'=>$diploma->product->id])
 
 
 </x-app-layout>

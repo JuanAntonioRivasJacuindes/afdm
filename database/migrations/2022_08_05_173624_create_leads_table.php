@@ -21,7 +21,6 @@ class CreateLeadsTable extends Migration
             $table->foreignId('status_id')->nullable()->default(null)->constrained('statuses');
             $table->foreignId('user_id')->nullable()->default(null)->constrained('users');
             $table->foreignId('product_id')->nullable()->default(null)->constrained('products');
-
             $table->timestamps();
         });
     }

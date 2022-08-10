@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\TeacherInfoController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\SubProductController;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -148,6 +149,7 @@ Route::get('view-session', function () {
     return view('student.diploma.index');
 });
 Route::resource('user', UserController::class)->middleware(['auth', 'permission:manage_users']);
+Route::resource('subproduct', SubProductController::class)->middleware(['auth', 'permission:manage_sub_products']);
 //Autenticacion Social
 Route::get('auth/{provider}', [SocialAuthController::class, 'redirectToProvider'])->name('social.auth');
 Route::get('auth/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);

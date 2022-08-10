@@ -45,8 +45,10 @@ class SubProductController extends Controller
      * @param  \App\Models\SubProduct  $subProduct
      * @return \Illuminate\Http\Response
      */
-    public function show(SubProduct $subProduct)
+    public function show($id)
     {
+        $subproduct= SubProduct::findOrFail($id);
+        return view('livewire.subproduct.show',compact('subproduct'));
         //
     }
 

@@ -109,8 +109,13 @@ Route::get('create_payment_method/', function () {
     $intent = $user->createSetupIntent();
     return view('payment.add-payment-method', compact('intent'));
 })->name('create_payment_method');
-
+//stripe Routes
 Route::get('stripe', [StripeController::class, 'stripe']);
+Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(function () {
+    Route::get('/create-price', [StripeController::class, 'createPrice'])->name('stripe.create-price');
+    Route::get('/install', [InstallController::class, 'install']);
+});
+
 Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
 Route::get('/product/pricing/{id}', [ProductController::class, 'pricing'])->name('product.pricing');
 Route::get('/product/checkout/plan/{id}', [ProductController::class, 'checkoutPlan'])->name('product.plan.checkout')->middleware('auth');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SubProduct;
 use Illuminate\Http\Request;
-
+use Laravel\Cashier\Cashier;
 class SubProductController extends Controller
 {
     /**
@@ -35,7 +35,13 @@ class SubProductController extends Controller
      */
     public function store(Request $request)
     {
-        SubProduct::create($request->input());
+       $localProduct= SubProduct::create($request->input());
+
+        $stripeProduct = StripeController::createProduct($request);
+
+        $localProduct->update([
+            'stripe_id' => $stripeProduct->id
+        ]);
         return redirect()->back();
     }
 
@@ -48,7 +54,9 @@ class SubProductController extends Controller
     public function show($id)
     {
         $subproduct= SubProduct::findOrFail($id);
-        return view('livewire.subproduct.show',compact('subproduct'));
+        $plans = Cashier::stripe()->prices->all(['product'=>$subproduct->stripe_id ]);
+
+        return view('livewire.subproduct.show',compact('subproduct', 'plans'));
         //
     }
 

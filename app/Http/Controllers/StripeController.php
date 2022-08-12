@@ -11,11 +11,16 @@ use Stripe;
 
 class StripeController extends Controller
 {
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  public function CreatePrice(Request $request)
+  {
+
+    Cashier::stripe()->prices->create([
+        'unit_amount' => $request->amount,
+        'currency' => $request->currency,
+        'product' => $request->product,
+      ]);
+    return redirect()->back();
+  }
     public function stripe()
     {
         return view('stripe');
@@ -62,13 +67,13 @@ class StripeController extends Controller
         $subscriptions = Cashier::stripe()->subscriptions->all();
         return $subscriptions;
     }
-    public function createProduct(Request $request)
+    public static function createProduct(Request $request)
     {
-        # code...
+
         $product = Cashier::stripe()->products->create([
             'name' => $request->name,
             'type' => 'service',
-            'statement_descriptor' => $request->statement_descriptor,
+            'statement_descriptor' => $request->name,
             'active' => true,
             'metadata' => [
                 'description' => $request->description,

@@ -112,8 +112,10 @@ Route::get('create_payment_method/', function () {
 //stripe Routes
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(function () {
-    Route::get('/create-price', [StripeController::class, 'createPrice'])->name('stripe.create-price');
-    Route::get('/install', [InstallController::class, 'install']);
+    Route::get('/price/create', [StripeController::class, 'createPrice'])->name('stripe.create-price');
+    Route::get('/price/delete-or-archive', [StripeController::class, 'deleteOrArchivePrice'])->name('stripe.price.delete-or-archive');
+    Route::get('/price/unarchive', [StripeController::class, 'unarchivePrice'])->name('stripe.price.unarchive');
+
 });
 
 Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');

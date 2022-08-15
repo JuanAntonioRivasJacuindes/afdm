@@ -14,12 +14,18 @@ class StripeController extends Controller
   public function CreatePrice(Request $request)
   {
 
-    Cashier::stripe()->prices->create([
-        'unit_amount' => $request->amount,
-        'currency' => $request->currency,
-        'product' => $request->product,
-      ]);
-    return redirect()->back();
+    try {
+        Cashier::stripe()->prices->create([
+            'unit_amount' => $request->amount,
+            'currency' => $request->currency,
+            'product' => $request->product,
+          ]);
+          session()->flash('success-message', 'Precio Agregado Correctamente');
+    } catch (\Throwable $th) {
+        session()->flash('danger-message', 'No se ha podido agregar');
+
+    }
+      return redirect()->back();
   }
     public function stripe()
     {
@@ -66,6 +72,43 @@ class StripeController extends Controller
         # code...
         $subscriptions = Cashier::stripe()->subscriptions->all();
         return $subscriptions;
+    }
+    public function unarchivePrice(Request $request)
+    {
+        try {
+            Cashier::stripe()->prices->update(
+                $request->plan_id,
+                ['active' => true]
+              );
+             session()->flash('success-message','El precio se ha Desarchivado');
+
+        } catch (\Throwable $th) {
+            session()->flash('danger-message','No se ha podido Desarchivar');
+        }
+        return redirect()->back();
+
+    }
+    public function deleteOrArchivePrice(Request $request)
+    {
+        try {
+            $price=Cashier::stripe()->prices->delete($request->plan_id);
+            session()->flash('success-message','Eliminado con exito');
+        } catch (\Throwable $th) {
+
+            try {
+                Cashier::stripe()->prices->update(
+                    $request->plan_id,
+                    ['active' => false]
+                  );
+                 session()->flash('success-message','El precio se ha archivado');
+
+            } catch (\Throwable $th) {
+                session()->flash('danger-message','No se ha podido archivar');
+            }
+        }
+
+        return redirect()->back();
+        # code...
     }
     public static function createProduct(Request $request)
     {

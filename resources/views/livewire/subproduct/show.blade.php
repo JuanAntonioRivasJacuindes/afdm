@@ -1,11 +1,12 @@
 <x-app-layout>
+
     <div class="m-5 p-5 bg-white">
-        <header>{{$subproduct->name}}</header>
-        <h2>{{$subproduct->description ??'No Definido'}}</h2>
-        <h2>{{$subproduct->stripe_id ??'No definido'}}</h2>
+        <header>{{ $subproduct->name }}</header>
+        <h2>{{ $subproduct->description ?? 'No Definido' }}</h2>
+        <h2>{{ $subproduct->stripe_id ?? 'No definido' }}</h2>
     </div>
     <div class="m-5 p-5 bg-white">
-        <form action="{{route('stripe.create-price')}}">
+        <form action="{{ route('stripe.create-price') }}">
             <input type="text" name="amount" placeholder="Monto">
             <label for="currency">Moneda</label>
             <select id="currency" name="currency">
@@ -176,7 +177,7 @@
                 <option value="ZMK">Zambian Kwacha</option>
             </select>
 
-            <input type="text" name="product" hidden value="{{$subproduct->stripe_id}}">
+            <input type="text" name="product" hidden value="{{ $subproduct->stripe_id }}">
 
             <x-jet-button>abr</x-jet-button>
         </form>
@@ -193,24 +194,31 @@
             </thead>
             <tbody>
                 @foreach ($plans as $plan)
-                <tr class="hover:bg-gray-200">
+                    <tr class="hover:bg-gray-200">
 
-                    <td>{{$plan->unit_amount/100}}</td>
-                    <td>{{$plan->type ?? 'No Especificado'}}</td>
-                    <td>{{$plan->recurring->interval ?? 'Una sola Vez'}}</td>
-                    <td>{{$plan->active ?? ''}}</td>
-                    <td>{{$plan->currency ?? ''}}</td>
-                    <td>
-                    @if ($plan->active)
-                    <x-jet-secondary-button>Archivar</x-jet-secondary-button>
-                    @else
-                    <x-jet-secondary-button>Desarchivar</x-jet-secondary-button>
+                        <td>{{ $plan->unit_amount / 100 }}</td>
+                        <td>{{ $plan->type ?? 'No Especificado' }}</td>
+                        <td>{{ $plan->recurring->interval ?? 'Una sola Vez' }}</td>
+                        <td>{{ $plan->active ?? '' }}</td>
+                        <td>{{ $plan->currency ?? '' }}</td>
+                        <td>
+                            @if ($plan->active)
+                                <form action="{{ route('stripe.price.delete-or-archive') }}">
+                                    <input type="text"hidden name="plan_id" value="{{ $plan->id }}"
+                                        id="">
+                                    <x-jet-secondary-button type="submit">Eliminar o Archivar</x-jet-secondary-button>
+                                </form>
+                            @else
+                            <form action="{{ route('stripe.price.unarchive') }}">
+                                <input type="text"hidden name="plan_id" value="{{ $plan->id }}"
+                                    id="">
+                                <x-jet-secondary-button type="submit">Desarchivar</x-jet-secondary-button>
+                            </form>
+                            @endif
+                        </td>
 
-                    @endif
-                    </td>
-
-                </tr>
-                    @endforeach
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

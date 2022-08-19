@@ -11,29 +11,28 @@ use Stripe;
 
 class StripeController extends Controller
 {
-  public function CreatePrice(Request $request)
-  {
+    public function CreatePrice(Request $request)
+    {
 
-    try {
-        Cashier::stripe()->prices->create([
-            'unit_amount' => $request->amount,
-            'currency' => $request->currency,
-            'product' => $request->product,
-          ]);
-          session()->flash('success-message', 'Precio Agregado Correctamente');
-    } catch (\Throwable $th) {
-        session()->flash('danger-message', 'No se ha podido agregar');
-
+        try {
+            Cashier::stripe()->prices->create([
+                'unit_amount' => $request->amount,
+                'currency' => $request->currency,
+                'product' => $request->product,
+            ]);
+            session()->flash('success-message', 'Precio Agregado Correctamente');
+        } catch (\Throwable $th) {
+            session()->flash('danger-message', 'No se ha podido agregar');
+        }
+        return redirect()->back();
     }
-      return redirect()->back();
-  }
     public function stripe()
     {
         return view('stripe');
     }
     public function addPaymentMethod($pid)
     {
-      dd($pid);
+        dd($pid);
         $user = User::find(Auth::user()->id);
         dd($user->paymentMethods);
         return redirect()->route('profile.show');
@@ -79,31 +78,28 @@ class StripeController extends Controller
             Cashier::stripe()->prices->update(
                 $request->plan_id,
                 ['active' => true]
-              );
-             session()->flash('success-message','El precio se ha Desarchivado');
-
+            );
+            session()->flash('success-message', 'El precio se ha Desarchivado');
         } catch (\Throwable $th) {
-            session()->flash('danger-message','No se ha podido Desarchivar');
+            session()->flash('danger-message', 'No se ha podido Desarchivar');
         }
         return redirect()->back();
-
     }
     public function deleteOrArchivePrice(Request $request)
     {
         try {
-            $price=Cashier::stripe()->prices->delete($request->plan_id);
-            session()->flash('success-message','Eliminado con exito');
+            $price = Cashier::stripe()->prices->delete($request->plan_id);
+            session()->flash('success-message', 'Eliminado con exito');
         } catch (\Throwable $th) {
 
             try {
                 Cashier::stripe()->prices->update(
                     $request->plan_id,
                     ['active' => false]
-                  );
-                 session()->flash('success-message','El precio se ha archivado');
-
+                );
+                session()->flash('success-message', 'El precio se ha archivado');
             } catch (\Throwable $th) {
-                session()->flash('danger-message','No se ha podido archivar');
+                session()->flash('danger-message', 'No se ha podido archivar');
             }
         }
 

@@ -12,6 +12,8 @@
             <option value="1">Inscripción</option>
             <option value="2">Acceso</option>
             <option value="3">Certificado</option>
+            <option value="4">Pago único</option>
+
 
 
         </select>

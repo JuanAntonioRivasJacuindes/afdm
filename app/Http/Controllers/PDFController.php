@@ -167,7 +167,7 @@ class PDFController extends Controller
         $pagina2 = "data:image/png;base64," . base64_encode(file_get_contents('storage/img/diploma/diploma-bg-2.jpg'));
 
         $pdf = PDF::loadView('PDF.diplomas.diplomado', compact('diplomado', 'name', 'title', 'date', 'cedula', 'date', 'hours', 'credits', 'pagina1', 'pagina2', 'foto'));
-        return $pdf->setPaper('letter')->stream($name . '.pdf');
+        return $pdf->setPaper('letter')->download($name . '.pdf');
     }
 
     public function createWelcome()

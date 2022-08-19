@@ -9,9 +9,7 @@ use App\Http\Controllers\InstallController;
 use App\Http\Controllers\TeacherInfoController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\SubProductController;
-
 use Illuminate\Support\Facades\Storage;
-
 use App\Models\User;
 use App\Models\Diploma;
 use App\Models\Course;
@@ -96,7 +94,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 Route::get('/product/select_schema', [ProductController::class, 'select_schema'])->name('product.select_schema');
 
-Route::get('/diploma/preview/{dip_id}', [DiplomaController::class, 'preview'])->name('diploma.preview');
+Route::get('/diploma/preview/{diploma:slug}', [DiplomaController::class, 'preview'])->name('diploma.preview');
 Route::get('/course/preview/{course_id}', [CourseController::class, 'preview'])->name('course.preview');
 
 Route::get('/sb', function () {
@@ -119,7 +117,7 @@ Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(functio
 });
 
 Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
-Route::get('/product/pricing/{id}', [ProductController::class, 'pricing'])->name('product.pricing');
+Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('product.pricing');
 Route::get('/product/checkout/plan/{id}', [ProductController::class, 'checkoutPlan'])->name('product.plan.checkout')->middleware('auth');
 Route::get('/product/checkout/price/{id}', [ProductController::class, 'checkoutPrice'])->name('product.price.checkout')->middleware('auth');
 Route::get('/product/buy_intent/success/{buy_intent_id}', [ProductController::class, 'buyIntentSuccess'])->name('product.buy_intent.success');

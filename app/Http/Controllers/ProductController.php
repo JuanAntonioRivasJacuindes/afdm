@@ -14,14 +14,12 @@ use Laravel\Cashier\Cashier;
 
 class ProductController extends Controller
 {
-    public function pricing($id)
+    public function pricing(Request $request)
     {
-        $product = Product::find($id);
-        $plans = $product->recurrentPlans();
-        $prices = $product->totalPrices();
+        $product = Product::find($request->product_id);
+        dd($product->subproducts);
 
-        $inscription = $product->inscription();
-        return view('product.pricing', compact('product', 'plans', 'prices', 'inscription'));
+        return view('product.pricing',compact('product'));
     }
     public function checkoutPrice($price_id)
     {

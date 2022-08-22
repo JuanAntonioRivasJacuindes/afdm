@@ -11,6 +11,11 @@ use Stripe;
 
 class StripeController extends Controller
 {
+    public function checkOut(Request $request)
+    {
+        dd($request);
+        return $request->user()->checkout($request->price);
+    }
     public function CreatePrice(Request $request)
     {
 

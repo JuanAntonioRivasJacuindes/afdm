@@ -22,7 +22,7 @@ class Inscription extends Model
     public function activePayments()
     {
         $now= Carbon::now();
-        $now=$now->subDays(8);
+        $now=$now->subDays(7);
 
         return MonthlyPayment::whereDate('expires_at' , '>',$now )->where('inscription_id',$this->id)->orderBy('expires_at')->get();
     }
@@ -66,7 +66,7 @@ class Inscription extends Model
     {
         if(!$this->hasActivePayments()){
             $date = Carbon::create( $this->product->productType()->date->starts_at);
-            $date= $date->addDays(8);
+            $date= $date->addDays(7);
             return $date;
         }else{
             $date = Carbon::create($this->activePayments()->last()->expires_at);

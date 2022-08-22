@@ -14,10 +14,14 @@ use Laravel\Cashier\Cashier;
 
 class ProductController extends Controller
 {
+    public function checkoutProduct(Request $request)
+    {
+        dd($request);
+        # code...
+    }
     public function pricing(Request $request)
     {
         $product = Product::find($request->product_id);
-        dd($product->subproducts);
 
         return view('product.pricing',compact('product'));
     }

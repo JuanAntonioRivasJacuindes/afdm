@@ -1,5 +1,5 @@
 <x-app-layout>
-    @dump($product)
+
     <section class="bg-gray-100">
         <div class="container max-w-full mx-auto py-12 px-6">
             <h1 class="text-center text-4xl text-black font-medium leading-snug tracking-wider">
@@ -63,8 +63,17 @@
                                 </ul>
                             </div>
                             <div class=" flex items-center p-8  uppercase">
-                                <a href="/register"
-                                    class="mt-3 text-lg font-semibold bg-primary w-full text-white rounded-lg px-6 py-3 block shadow-xl hover:bg-secondary text-center">Elegir</a>
+                                @foreach ($product->subproducts as $sp)
+                                    @if ($sp->type==1)
+
+                                    <form action="{{route('product.checkout')}}">
+                                        <input type="text" name="subproduct_id" value="{{$sp->stripe_id}}" hidden>
+                                        <x-jet-button class="w-full">Elegir</x-jet-button>
+                                    </form>
+                                    @endif
+
+                                @endforeach
+
                             </div>
                         </div>
                     </div>

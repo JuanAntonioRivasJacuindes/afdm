@@ -118,7 +118,9 @@ Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(functio
 
 Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
 Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('product.pricing');
-Route::get('/product/checkout/plan/{id}', [ProductController::class, 'checkoutPlan'])->name('product.plan.checkout')->middleware('auth');
+
+
+Route::get('/product/checkout/', [ProductController::class, 'checkoutProduct'])->name('product.checkout')->middleware('auth');
 Route::get('/product/checkout/price/{id}', [ProductController::class, 'checkoutPrice'])->name('product.price.checkout')->middleware('auth');
 Route::get('/product/buy_intent/success/{buy_intent_id}', [ProductController::class, 'buyIntentSuccess'])->name('product.buy_intent.success');
 Route::get('/product/buy_intent/cancel/{buy_intent_id}', [ProductController::class, 'buyIntentCancel'])->name('product.buy_intent.cancel');

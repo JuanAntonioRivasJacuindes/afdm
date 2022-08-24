@@ -122,6 +122,12 @@ Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('pr
 
 Route::get('/product/checkout/', [ProductController::class, 'checkoutProduct'])->name('product.checkout')->middleware('auth');
 Route::get('/product/checkout/price/{id}', [ProductController::class, 'checkoutPrice'])->name('product.price.checkout')->middleware('auth');
+Route::get('/checkout-succsess',function(Request $request){
+    dd($request);
+})->name('checkout.success');
+Route::get('/checkout-cancel',function(Request $request){
+    dd($request);
+})->name('checkout.cancel');
 Route::get('/product/buy_intent/success/{buy_intent_id}', [ProductController::class, 'buyIntentSuccess'])->name('product.buy_intent.success');
 Route::get('/product/buy_intent/cancel/{buy_intent_id}', [ProductController::class, 'buyIntentCancel'])->name('product.buy_intent.cancel');
 Route::resource('course', CourseController::class);

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Laravel\Cashier\Cashier;
 class SubProduct extends Model
 {
     use HasFactory;
@@ -15,4 +15,10 @@ class SubProduct extends Model
         'type',
         'stripe_id',
     ];
+    public function getPlans()
+    {
+        return Cashier::stripe()->prices->all(['product'=>$this->stripe_id ,'active'=>true ]);
+
+        # code...
+    }
 }

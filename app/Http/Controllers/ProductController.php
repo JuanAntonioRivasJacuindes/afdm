@@ -16,14 +16,24 @@ class ProductController extends Controller
 {
     public function checkoutProduct(Request $request)
     {
-        dd($request);
+
+        $user = $request->user();
+        if (!$user->stripe_id) {
+            $user->createAsStripeCustomer();
+        }
+        return $user->checkout([$request->stripe_id => 1], [
+            'success_url' => route('checkout.success'),
+            'cancel_url' => route('checkout.cancel'),
+        ]);
+
         # code...
     }
     public function pricing(Request $request)
     {
         $product = Product::find($request->product_id);
+        $subproducts= $product->subproducts;
 
-        return view('product.pricing',compact('product'));
+        return view('product.pricing',compact('product','subproducts'));
     }
     public function checkoutPrice($price_id)
     {

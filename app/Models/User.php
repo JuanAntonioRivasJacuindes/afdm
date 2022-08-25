@@ -87,6 +87,10 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(MonthlyPayment::class, Inscription::class);
     }
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
     public function isRegistered($product_id)
     {
         $insc= Inscription::where('user_id',$this->id)

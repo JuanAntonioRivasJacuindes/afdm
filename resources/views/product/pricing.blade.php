@@ -28,6 +28,7 @@
 
                 <form action="{{route('product.checkout')}}">
                     <input type="text" name="stripe_id" value="{{$subproduct->getPlans()->first()->id}}" hidden>
+                    <input type="text" name="subproduct_id" value="{{$subproduct->id}}" hidden>
 
                     <x-jet-button class="">ELEGIR
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">

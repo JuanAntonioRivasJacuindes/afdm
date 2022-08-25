@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
 use App\Models\BuyIntent;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Pucharse;
@@ -21,9 +22,15 @@ class ProductController extends Controller
         if (!$user->stripe_id) {
             $user->createAsStripeCustomer();
         }
+
+       $order =  $user->order()->create([
+            'subproduct_id'=>$request->subproduct_id,
+            'status_id'=>2,
+            'order_id'=>Str::random(20),
+        ]);
         return $user->checkout([$request->stripe_id => 1], [
-            'success_url' => route('checkout.success'),
-            'cancel_url' => route('checkout.cancel'),
+            'success_url' => route('checkout.success',['order_id'=>$order->order_id]),
+            'cancel_url' => route('checkout.cancel',['order_id'=>$order->order_id]),
         ]);
 
         # code...
@@ -153,6 +160,23 @@ class ProductController extends Controller
             'status_id' => 4,
         ]);
         $this->giveAccessTo($buy_intent->id);
+        # code...
+    }
+    public function checkoutCancel($order_id)
+    {
+        $order = Order::where('order_id',$order_id)->first();
+        $order->update(['status_id'=>5]);
+        return redirect(route('/'));
+
+    }
+    public function checkoutSuccess($order_id)
+    {
+        $order = Order::where('order_id',$order_id)->first();
+
+        $order->update([
+            'status_id' => 4,
+        ]);
+        $this->giveAccessTo($order->id);
         # code...
     }
     public function buyIntentCancel($buy_intent_id)

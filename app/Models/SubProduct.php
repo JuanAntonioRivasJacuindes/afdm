@@ -21,4 +21,8 @@ class SubProduct extends Model
 
         # code...
     }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

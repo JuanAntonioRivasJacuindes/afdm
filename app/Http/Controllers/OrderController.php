@@ -82,4 +82,34 @@ class OrderController extends Controller
     {
         //
     }
+
+
+    public static function process(Order $order)
+    {
+
+        $user = $order->user;
+        if($order->subproduct->type==1){
+            $user->inscriptions()->create([
+                'product_id'=>$order->subproduct->product->id,
+                'status_id'=>1,
+            ]);
+        }elseif($order->subproduct->type==2){
+
+        }elseif($order->subproduct->type==3){
+
+        }elseif($order->subproduct->type==4){
+           $inscription =  $user->inscriptions()->create([
+                'product_id'=>$order->subproduct->product->id,
+                'status_id'=>1,
+            ]);
+
+        }
+
+
+
+
+
+        return redirect()->route('dashboard');
+    }
+
 }

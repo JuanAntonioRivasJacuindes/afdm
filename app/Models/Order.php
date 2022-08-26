@@ -14,5 +14,14 @@ class Order extends Model
         'status_id',
         'order_id'
     ];
+    public function subproduct()
+    {
+        return $this->belongsTo(SubProduct::class);
+        # code...
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

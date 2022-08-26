@@ -153,20 +153,12 @@ class ProductController extends Controller
     }
 
 
-    public function buyIntentSuccess($buy_intent_id)
-    {
-        $buy_intent = BuyIntent::find($buy_intent_id);
-        $buy_intent->update([
-            'status_id' => 4,
-        ]);
-        $this->giveAccessTo($buy_intent->id);
-        # code...
-    }
-    public function checkoutCancel($order_id)
+     public function checkoutCancel($order_id)
     {
         $order = Order::where('order_id',$order_id)->first();
         $order->update(['status_id'=>5]);
-        return redirect(route('/'));
+        return redirect(route('/'))->with('warning-message','Cancelaste la compra');
+
 
     }
     public function checkoutSuccess($order_id)
@@ -176,37 +168,10 @@ class ProductController extends Controller
         $order->update([
             'status_id' => 4,
         ]);
-        $this->giveAccessTo($order->id);
+        OrderController::process($order);
+        return redirect(route('dashboard'));
         # code...
     }
-    public function buyIntentCancel($buy_intent_id)
-    {
 
-        $buy_intent = BuyIntent::find($buy_intent_id);
 
-        $buy_intent->update([
-            'status_id' => 5,
-        ]);
-        return redirect(route('/'));
-        # code...
-    }
-    public function giveAccessTo($buy_intent_id)
-    {
-        $buy_intent = BuyIntent::find($buy_intent_id);
-        $items = $buy_intent->cart->items;
-        $user = User::find($buy_intent->user_id);
-
-        foreach ($items as $item) {
-
-            $user->givePermissionTo($item->getProduct()->getPermissionName());
-
-            $pucharse = Pucharse::create([
-                'user_id' => $user->id,
-                'plan_id' => $item->plan->id,
-                'product_id' => $item->getProduct()->id,
-                'buy_intent_id' => $buy_intent->id,
-            ]);
-        }
-        return redirect()->route('dashboard');
-    }
 }

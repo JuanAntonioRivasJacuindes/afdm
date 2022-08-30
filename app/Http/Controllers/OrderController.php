@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\MonthlyPayment;
 
@@ -117,9 +117,18 @@ class OrderController extends Controller
 
         }elseif($order->subproduct->type==4){
 
+
            $inscription =  $user->inscriptions()->create([
                 'product_id'=>$order->subproduct->product->id,
                 'status_id'=>1,
+            ]);
+
+            $pay = MonthlyPayment::create([
+                'amount'=>0,
+                'inscription_id'=>$inscription->id,
+                'voucher'=>'stipe',
+                'status_id'=>1,
+                'expires_at'=>Carbon::parse( $order->subproduct->product->productType()->date->starts_at)->addYear(1),
             ]);
 
         }

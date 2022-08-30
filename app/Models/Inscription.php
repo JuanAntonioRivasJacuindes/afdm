@@ -31,6 +31,10 @@ class Inscription extends Model
         return $this->hasMany(MonthlyPayment::class);
         # code...
     }
+    public function nextPayment()
+    {
+        return$this->lastPaymentExpire()->addMonth(1);
+    }
     public function hasActivePayments()
     {
 
@@ -64,12 +68,12 @@ class Inscription extends Model
 
     public function lastPaymentExpire()
     {
-        if(!$this->hasActivePayments()){
+        if(!$this->payments){
             $date = Carbon::create( $this->product->productType()->date->starts_at);
             $date= $date->addDays(7);
             return $date;
         }else{
-            $date = Carbon::create($this->activePayments()->last()->expires_at);
+            $date = Carbon::create($this->payments->last()->expires_at);
 
             return $date;
         }

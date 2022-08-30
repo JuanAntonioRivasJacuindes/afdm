@@ -17,6 +17,7 @@ class ActivePayment
      */
     public function handle(Request $request, Closure $next)
     {
+
        $inscription = Inscription::find($request->inscription_id);
 
         if($inscription->allowAccess() && $inscription->user_id == Auth::user()->id){

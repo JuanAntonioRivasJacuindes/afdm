@@ -11,12 +11,12 @@
     <div class="bg-gradient-to-b  from-gray-100 to-primary">
 
         @if (Session::has('message'))
-        <div class="flex justify-between text-green-200 shadow-inner rounded p-3 bg-green-600">
-            <p class="self-center">
-                {{ Session::get('message') }}
-            </p>
+            <div class="flex justify-between text-green-200 shadow-inner rounded p-3 bg-green-600">
+                <p class="self-center">
+                    {{ Session::get('message') }}
+                </p>
 
-        </div>
+            </div>
         @endif
         <section>
 
@@ -57,13 +57,60 @@
 
                                             <div class=" mt-10 md:mt-40 mx-auto w-full ">
 
-                                                {{-- <form method="get">
-                                                        <x-jet-button class=" w-full ">Ir allá</x-jet-button>
-                                                </form> --}}
+                                                {{--  --}}
+                                                @if (Auth::check())
+                                                    @if (Auth::user()->isRegistered($diploma->product_id))
+                                                        <form method="get" action="{{ route('diploma.show') }}">
+                                                            <input hidden type="text" name="product_id"
+                                                                value="{{ $diploma->product_id }}" id="">
+                                                            <input hidden type="text" name="inscription_id"
+                                                                value="{{ Auth::user()->findInscription($diploma->product_id)->id }}"
+                                                                id="">
+                                                            <x-jet-button class=" w-full ">Ir allá</x-jet-button>
 
-                                                <div class=" flex flex-col md:flex-row  w-full">
-                                                    <a target="blank" href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}" class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition">Contactar con un asesor</a>
-                                                    <a target="blank" href=" class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition"></a>
+                                                        </form>
+                                                    @else
+                                                        <div class=" flex flex-col md:flex-row  w-full">
+                                                            <a target="blank"
+                                                                href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}"
+                                                                class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition">Contactar
+                                                                con un asesor</a>
+                                                            <a target="blank" href=" class="w-full inline-flex
+                                                                items-center px-4 py-2 bg-primary border
+                                                                border-transparent rounded-md font-semibold text-xs m-1
+                                                                text-white uppercase tracking-widest hover:bg-secondary
+                                                                active:bg-secondary focus:outline-none
+                                                                focus:border-secondary focus:ring disabled:opacity-25
+                                                                transition"></a>
+
+                                                            <x-jet-button class="w-full " x-data="{ id: 'modal' }"
+                                                                x-on:click="$dispatch('modal-overlay',{id})">Prefiero
+                                                                que me
+                                                                contacten</x-jet-button>
+
+
+                                                        </div>
+                                                        <form action="{{ route('product.pricing') }}" class="w-full">
+                                                            <input type="text" name="product_id" id=""
+                                                                value="{{ $diploma->product->id }}" hidden>
+                                                            <x-jet-button>Inscribirme en linea</x-jet-button>
+                                                        </form>
+                                                        <a target="blank"
+                                                            class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition"
+                                                            href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">Compartir</a>
+                                                    @endif
+                                                 @else
+                                                 <div class=" flex flex-col md:flex-row  w-full">
+                                                    <a target="blank"
+                                                        href="https://api.whatsapp.com/send?phone=+521{{ $diploma->info->contact ?? '5520824098' }}&text=Hola,%20Tengo%20interes%20en%20{{ $diploma->title }}"
+                                                        class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition">Contactar
+                                                        con un asesor</a>
+                                                    <a target="blank" href=" class="w-full inline-flex items-center px-4
+                                                        py-2 bg-primary border border-transparent rounded-md
+                                                        font-semibold text-xs m-1 text-white uppercase tracking-widest
+                                                        hover:bg-secondary active:bg-secondary focus:outline-none
+                                                        focus:border-secondary focus:ring disabled:opacity-25
+                                                        transition"></a>
 
                                                     <x-jet-button class="w-full " x-data="{ id: 'modal' }"
                                                         x-on:click="$dispatch('modal-overlay',{id})">Prefiero que me
@@ -71,12 +118,17 @@
 
 
                                                 </div>
-                                                <form action="{{route('product.pricing')}}" class="w-full">
-                                                    <input type="text" name="product_id" id="" value="{{$diploma->product->id}}" hidden>
+                                                <form action="{{ route('product.pricing') }}" class="w-full">
+                                                    <input type="text" name="product_id" id=""
+                                                        value="{{ $diploma->product->id }}" hidden>
                                                     <x-jet-button>Inscribirme en linea</x-jet-button>
                                                 </form>
-                                                <a target="blank" class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition" href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">Compartir</a>
+                                                <a target="blank"
+                                                    class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition"
+                                                    href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">Compartir</a>
 
+
+                                                @endif
 
                                             </div>
                                         </div>

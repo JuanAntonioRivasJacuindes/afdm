@@ -51,6 +51,7 @@ class DiplomaController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
             'title' => 'required',
             'description' => 'required',

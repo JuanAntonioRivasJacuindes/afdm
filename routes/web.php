@@ -39,6 +39,7 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 
     Route::get('/install', [InstallController::class, 'install']);
 });
+Route::resource('diploma', DiplomaController::class)->except(['show'])->middleware(['permission:manage_system']);
 Route::prefix('forms')->group(function () {
     Route::get('/register-teacher-info', [FormController::class, 'registerTeacherInfo'])->name('form.register.teacher.info');
 
@@ -71,7 +72,7 @@ Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->na
 //Diploma routes
 
 //end diploma routes
-Route::resource('diploma', DiplomaController::class)->except(['show']);
+
 Route::post('diploma/update/flyer', [DiplomaController::class, 'updateFlyer'])->name('diploma.update.flyer');
 Route::post('diploma/update/poster', [DiplomaController::class, 'updatePoster'])->name('diploma.update.poster');
 Route::post('lead/store', [LeadController::class, 'store'])->name('lead.store');

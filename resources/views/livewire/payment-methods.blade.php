@@ -12,40 +12,34 @@
         <x-jet-button
             class="w-full h-12 px-5  transition-colors duration-150 bg-indigo-600 rounded-lg focus:shadow-outline "
             onclick="window.location='{{ route('create_payment_method') }}'">+ Agregar una tarjeta</x-jet-button>
-        <div class="py-5  bg-gray-100 px-10">
-            @foreach ($paymentMethods as $card)
-                <div
-                    class="px-8 max-w-md mx-auto bg-gradient-to-tr from-black via-gray-500 to-black rounded-lg overflow-hidden md:max-w-sm hover:scale-110 duration-150 shadow-2xl">
-                    <div class="md:flex">
-                        <div class="w-full p-4">
-                            <div class="flex justify-between items-center text-white"> <span
-                                    class="text-2xl font-bold uppercase">{{ $card->card->brand }}</span> </div>
-                            <div class="flex justify-between items-center mt-10">
 
-                                <div class="flex flex-row"> <span class="text-white text-2xl mr-1 font-bold">**** ****
-                                        **** {{ $card->card->last4 }}</span> </div>
-                            </div>
-
-                            <div class="mt-8 flex justify-between items-center text-white">
-                                <div class="flex flex-col"> <span
-                                        class="font-bold text-gray-300 text-sm">{{ $card->card->funding }}</span> <span
-                                        class="font-bold">{{ $card->billing_details->name }}</span> </div>
-                                <div class="flex flex-col"> <span class="font-bold text-gray-300 text-sm">Expira</span>
-                                    <span class="font-bold">{{ $card->card->exp_month }} /
-                                        {{ $card->card->exp_year }}</span> </div>
-
-                            </div>
-
-                            <x-jet-danger-button class="w-full h-12  " wire:click="deleteCard('{{ $card->id }}')">
-                                Eliminar</x-jet-danger-button>
-                        </div>
-
-                    </div>
-
+        @foreach ($paymentMethods as $card)
+            <div class="text-center bg-gray-100 my-2 p-2 rounded-md border-2 hover:bg-gray-200 flex flex-row">
+                <div>
+                    {{ $card->card->funding }}
                 </div>
-            @endforeach
+                <div>
+                    {{ $card->card->brand }}
+                </div>
+                <div>
 
-        </div>
+                  XXXX-XXXX-XXXX-{{ $card->card->last4 }}
+                </div>
+                <div>
+                    {{ $card->card->exp_month }}/{{ $card->card->exp_year }}
+                </div>
+                <div>
+                    <x-jet-danger-button  wire:click="deleteCard('{{ $card->id }}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                        </svg>
+                    </x-jet-danger-button>
+                </div>
+            </div>
+        @endforeach
+
 
     </x-slot>
 

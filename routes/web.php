@@ -119,7 +119,7 @@ Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(functio
 
 });
 
-Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
+Route::get('add_payment_method/{seti}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
 Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('product.pricing');
 
 

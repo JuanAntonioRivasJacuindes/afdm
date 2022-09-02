@@ -35,11 +35,14 @@ class StripeController extends Controller
     {
         return view('stripe');
     }
-    public function addPaymentMethod($pid)
+    public function addPaymentMethod($seti)
     {
-        dd($pid);
+        $intent = Cashier::stripe()->setupIntents->retrieve($seti
+          );
+
         $user = User::find(Auth::user()->id);
-        dd($user->paymentMethods);
+        $user->addPaymentMethod($intent->payment_method);
+
         return redirect()->route('profile.show');
     }
     public function createSubscription(Request $request)

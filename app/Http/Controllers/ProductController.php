@@ -15,11 +15,14 @@ use Laravel\Cashier\Cashier;
 
 class ProductController extends Controller
 {
-
+    public function subscriptionCheckout(Request $request)
+    {
+        dd($request);
+        # code...
+    }
     public function checkoutProduct(Request $request)
     {
-
-        $user = $request->user();
+       $user = $request->user();
         if (!$user->stripe_id) {
             $user->createAsStripeCustomer();
         }
@@ -29,18 +32,26 @@ class ProductController extends Controller
             'status_id'=>2,
             'order_id'=>Str::random(20),
         ]);
-        return
 
-        Cashier::stripe()->subscriptions->create([
-            'customer' =>$user->stripe_id,
+
+            return $user->checkout([$request->stripe_id => 1], [
+                'success_url' => route('checkout.success',['order_id'=>$order->order_id]),
+                'cancel_url' => route('checkout.cancel',['order_id'=>$order->order_id]),
+            ]);
+
+
+    }
+    public function subscribe(Request $request)
+    {
+
+        return Cashier::stripe()->subscriptions->create([
+            'customer' =>$request->user()->stripe_id,
             'collection_method'=> "send_invoice",
             'days_until_due'=> 30,
             'items' => [
               ['price' => $request->stripe_id],
             ],
           ]);
-        # code...
-
     }
     public function pricing(Request $request)
     {

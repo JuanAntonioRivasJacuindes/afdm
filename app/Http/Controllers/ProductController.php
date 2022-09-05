@@ -15,6 +15,7 @@ use Laravel\Cashier\Cashier;
 
 class ProductController extends Controller
 {
+
     public function checkoutProduct(Request $request)
     {
 

@@ -20,10 +20,17 @@ class ActivePayment
 
        $inscription = Inscription::find($request->inscription_id);
 
-        if($inscription->allowAccess() && $inscription->user_id == Auth::user()->id){
-            return $next($request);
-        }else{
-            abort(403);
-        }
+       //Si el alumno tiene no esta suscrito
+       if($inscription->allowAccess() && $inscription->user_id == Auth::user()->id || $request->user()->subscribed($request->product_id)){
+           return $next($request);
+       }
+       if (!$request->user()->subscribed($request->product_id)) {
+
+        return route('user.suscribe',['product_id'=>$request->product_id]);
+        //si el alumno esta suscrito
+       }else{
+        abort(403);
+       }
+     //si tiene una suscripcion externa
     }
 }

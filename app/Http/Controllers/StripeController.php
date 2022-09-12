@@ -41,12 +41,24 @@ class StripeController extends Controller
           );
 
         $user = User::find(Auth::user()->id);
-        $user->addPaymentMethod($intent->payment_method);
+        $user->updateDefaultPaymentMethod($intent->payment_method);
 
         return redirect()->route('profile.show');
     }
+    public function suscribe(Request $request)
+    {
+
+
+        return view('user.suscribe');
+        # code...
+    }
     public function createSubscription(Request $request)
     {
+        dd($request);
+        dd($request->user()->subscribed('los_valua_papus'));
+        $request->user()->newSubscription('', 'price_1LdL2VK1HFOOH5etmPpgwM1p')->create($request->user()->paymentMethods()->first()->id);
+
+
         //contenido del request [user:id, stripe_id del producto ]
 
         $user = User::find(Auth::user()->id);

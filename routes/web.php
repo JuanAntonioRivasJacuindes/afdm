@@ -93,8 +93,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $user = Auth::user();
     return view('dashboard', compact('user'));
 })->name('dashboard');
+Route::get('user/suscribe/{product_id}',[StripeController::class,'suscribe'])->name('user.suscribe');
 Route::middleware(['auth'])->get('/user/payments',[UserController::class,'payments'])->name('user.payments');
-
+Route::middleware(['auth'])->get('/user/invoices',[UserController::class,'invoices'])->name('user.invoices');
 Route::get('/product/select_schema', [ProductController::class, 'select_schema'])->name('product.select_schema');
 
 Route::get('/diploma/preview/{diploma:slug}', [DiplomaController::class, 'preview'])->name('diploma.preview');

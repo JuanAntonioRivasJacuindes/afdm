@@ -15,6 +15,10 @@ class Inscription extends Model
         'status_id',
         'voucher',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -46,7 +50,8 @@ class Inscription extends Model
     }
     public function allowAccess()
     {
-        if($this->hasActivePayments()||$this->hasGracePeriod()){
+        dd($this);
+        if($this->hasActivePayments()||$this->hasGracePeriod()||$this->user->subscribed($this->product_id)){
 
 
             return true;

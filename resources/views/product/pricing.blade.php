@@ -6,11 +6,11 @@
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Elige el mejor precio para ti.</p>
 
             </div>
-            <div class="flex flex-row -m-4">
+            <div class="flex flex-row  ">
                 @foreach ($subproducts as $subproduct)
                     @if ($subproduct->type == 1 || $subproduct->type == 4)
 
-                    <div class="p-4 xl:w-1/4 w-full">
+                    <div class="p-4 w-1/4  mx-auto">
                             <div
                                 class="h-full p-6 rounded-lg border-2 border-primary flex flex-col relative overflow-hidden">
 
@@ -42,7 +42,7 @@
                                             viewBox="0 0 24 24">
                                             <path d="M20 6L9 17l-5-5"></path>
                                         </svg>
-                                    </span>Acceso a todas las clases
+                                    </span>Acceso a 160 horas de clases
                                 </p>
                                 <p class="flex items-center text-gray-600 mb-2">
                                     <span
@@ -52,7 +52,7 @@
                                             viewBox="0 0 24 24">
                                             <path d="M20 6L9 17l-5-5"></path>
                                         </svg>
-                                    </span>Acceso a todas las grabaciones
+                                    </span>Acceso a todas las grabaciones por 1 año
                                 </p>
                                 <p class="flex items-center text-gray-600 mb-2">
                                     <span

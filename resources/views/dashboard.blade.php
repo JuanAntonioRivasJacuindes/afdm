@@ -5,8 +5,10 @@
         </h2>
     </x-slot>
 
+    <div class="TN bzz aHS-YH" style="margin-left:0px"><div class="qj qr"></div><div class="aio UKr6le"><span class="nU false"><a href=" https://meet.google.com/zdu-rkdp-qrc" target="_top" class="J-Ke n0" title="Start a meeting" aria-label="Start a meeting" draggable="false">Start a meeting</a></span></div><div class="nL aif"></div></div>
     <!-- Section 1 -->
     <section class=" p-5 bg-white md:px-0">
+
         <div class="container items-center max-w-full px-1 md:px-4 mx-auto xl:px-5">
             @if ($user->inscriptions->count() == 0)
                 <div class="w-full text-center">

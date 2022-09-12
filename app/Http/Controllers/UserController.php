@@ -24,6 +24,19 @@ class UserController extends Controller
         return view('user.payments',compact('payments'));
 
     }
+
+    public function invoices(Request $request)
+    {
+
+       $payments = Cashier::stripe()->charges->all(['customer' =>Auth::user()->stripe_id]);
+      $portal =  Cashier::stripe()->billingPortal->sessions->create([
+        'customer' => $request->user()->stripe_id,
+        'return_url' => route('dashboard'),
+      ]);
+
+      return redirect($portal->url);
+
+    }
     /**
      * Display a listing of the resource.
      *

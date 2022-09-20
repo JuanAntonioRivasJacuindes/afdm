@@ -42,6 +42,7 @@ class Inscription extends Model
     public function hasActivePayments()
     {
 
+
         if($this->activePayments()->count()>0){
             return true;
         }else{
@@ -50,7 +51,7 @@ class Inscription extends Model
     }
     public function allowAccess()
     {
-        dd($this);
+        dd($this->user->subscribed($this->product_id));
         if($this->hasActivePayments()||$this->hasGracePeriod()||$this->user->subscribed($this->product_id)){
 
 

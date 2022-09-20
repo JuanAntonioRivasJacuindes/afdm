@@ -6,6 +6,9 @@
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Elige el mejor precio para ti.</p>
 
             </div>
+
+            <input type="text" name="prueba">
+
             <div class="flex flex-row  ">
                 @foreach ($subproducts as $subproduct)
                     @if ($subproduct->type == 1 || $subproduct->type == 4)

@@ -63,6 +63,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     public function billing(Request $request)
+     {
+        $user = $request->user();
+        $invoices = $user->invoices(['status'=>'open']);
+        return view('billing.index',compact('invoices'));
+        # code...
+     }
     public function store(Request $request)
     {
         //

@@ -64,7 +64,7 @@ Route::prefix('coordination')->middleware(['permission:manage_content'])->group(
     Route::resource('/lead', LeadController::class)->except(['store']);
 });
 
-
+Route::get('billing',[UserController::class,'billing'])->middleware('auth')->name('user.billing');
 Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
 //end Admin Routes
 Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');

@@ -73,6 +73,9 @@
                                 <x-jet-dropdown-link href="{{ route('admin') }}">
                                     {{ __('Panel de Administración') }}
                                 </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('user.billing') }}">
+                                    {{ __('Facturación') }}
+                                </x-jet-dropdown-link>
 
                                 @endhasrole
 
@@ -142,6 +145,9 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
+                    <x-jet-responsive-nav-link href="{{ route('user.billing') }}" :active="request()->routeIs('user.billing')">
+                        {{ __('Facturación') }}
+                    </x-jet-responsive-nav-link>
                     @hasrole('Administrator')
                     <x-jet-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}

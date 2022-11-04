@@ -19,7 +19,6 @@
             </div>
         @endif
         <section>
-
             <div class="min-h-screen hero-image bg-right-bottom bg-cover ">
                 <div class="relative container mx-auto p-4">
                     <div>
@@ -30,6 +29,7 @@
                                         <div class="w-full md:w-1/2">
                                             <img alt="flyer" class="w-full   shadow-2xl"
                                                 src="{{ asset($diploma->flyer_thumbnail()) }}">
+                                                {{--<img src="http://localhost:8000/storage/course/posters/rPLilEmho76vwpoNnqDD94G4GjFDzRP6vtKjKSlC.jpg" alt="flyer" class="w-full   shadow-2xl">--}}
                                         </div>
                                         <div
                                             class="w-full md:w-1/2 p-5 md:p-10  bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">

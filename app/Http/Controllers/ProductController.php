@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Pucharse;
 use Laravel\Cashier\Cashier;
 
+use PhpParser\Node\Expr\Cast\Object_;
 class ProductController extends Controller
 {
     public function subscriptionCheckout(Request $request)
@@ -22,7 +23,8 @@ class ProductController extends Controller
     }
     public function checkoutProduct(Request $request)
     {
-       $user = $request->user();
+       //dd($request);
+        $user = $request->user();
         if (!$user->stripe_id) {
             $user->createAsStripeCustomer();
         }
@@ -43,7 +45,11 @@ class ProductController extends Controller
     }
     public function subscribe(Request $request)
     {
-
+        //dd("ruta Product Controller subscribe");
+        //auqi me quede
+        $request->user()->stripe_id;
+        $price_cus="price_1LmiKDK1HFOOH5etpZhMHXzF";
+        //dd($req);
         return Cashier::stripe()->subscriptions->create([
             'customer' =>$request->user()->stripe_id,
             'collection_method'=> "send_invoice",
@@ -52,6 +58,7 @@ class ProductController extends Controller
               ['price' => $request->stripe_id],
             ],
           ]);
+
     }
     public function pricing(Request $request)
     {

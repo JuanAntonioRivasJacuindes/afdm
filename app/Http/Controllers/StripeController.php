@@ -37,8 +37,7 @@ class StripeController extends Controller
     }
     public function addPaymentMethod($seti)
     {
-        $intent = Cashier::stripe()->setupIntents->retrieve($seti
-          );
+        $intent = Cashier::stripe()->setupIntents->retrieve($seti);
 
         $user = User::find(Auth::user()->id);
         $user->updateDefaultPaymentMethod($intent->payment_method);
@@ -54,16 +53,19 @@ class StripeController extends Controller
     }
     public function createSubscription(Request $request)
     {
-        dd($request);
-        dd($request->user()->subscribed('los_valua_papus'));
-        $request->user()->newSubscription('', 'price_1LdL2VK1HFOOH5etmPpgwM1p')->create($request->user()->paymentMethods()->first()->id);
+        //dd("ruta StripeController createSubscription");
 
+        $request->user()->subscribed('los_valua_papus_2');
+        //$res= $request->user()->subscribed('los_valua_papus');
+        //dd($res);
+        $request->user()->newSubscription('test subscription', 'price_1LdL2VK1HFOOH5etmPpgwM1p')->create($request->user()->paymentMethods()->first()->id);
+        //dd($request);
 
         //contenido del request [user:id, stripe_id del producto ]
 
-        $user = User::find(Auth::user()->id);
-        $paymentMethod = $user->defaultPaymentMethod();
-        $user->newSubscription('prod_KkQV008xpCGgJW', 'price_1K4veJK1HFOOH5et7fIRTnGK')->create($paymentMethod->id);
+        //$user = User::find(Auth::user()->id);
+        //$paymentMethod = $user->defaultPaymentMethod();
+        //$user->newSubscription('12', 'price_1K4veJK1HFOOH5et7fIRTnGK')->create($paymentMethod->id);
         return redirect()->route('profile.show');
     }
 

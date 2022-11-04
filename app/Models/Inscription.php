@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class Inscription extends Model
 {
     use HasFactory;
@@ -51,10 +53,8 @@ class Inscription extends Model
     }
     public function allowAccess()
     {
-        dd($this->user->subscribed($this->product_id));
-        if($this->hasActivePayments()||$this->hasGracePeriod()||$this->user->subscribed($this->product_id)){
-
-
+        // dd($this->user->subscribed($this->product_id));
+        if($this->hasActivePayments()&&$this->user_id == Auth::user()->id ||$this->hasGracePeriod()||$this->user->subscribed($this->product_id)){
             return true;
         }else{
             return false;

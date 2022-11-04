@@ -7,12 +7,11 @@
 
             </div>
 
-            <input type="text" name="prueba">
+            {{--<input type="text" name="prueba">--}}
 
             <div class="flex flex-row  ">
                 @foreach ($subproducts as $subproduct)
                     @if ($subproduct->type == 1 || $subproduct->type == 4)
-
                     <div class="p-4 w-1/4  mx-auto">
                             <div
                                 class="h-full p-6 rounded-lg border-2 border-primary flex flex-col relative overflow-hidden">
@@ -68,6 +67,7 @@
                                     </span>Acceso a todas las grabaciones
                                 </p>
                                 @endif
+
                                 @if ($subproduct->type == 1 )
 
 

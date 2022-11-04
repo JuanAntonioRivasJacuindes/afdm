@@ -22,6 +22,9 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
 use Spatie\Permission\Models\Permission;
 use Intervention\Image\ImageManagerStatic as Image;
+use Laravel\Cashier\Cashier;
+use Stripe\Stripe;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +69,7 @@ Route::prefix('coordination')->middleware(['permission:manage_content'])->group(
 
 Route::get('billing',[UserController::class,'billing'])->middleware('auth')->name('user.billing');
 Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
+//Route::get('diploma/watch', [DiplomaController::class, 'show'])->name('diploma.show');
 //end Admin Routes
 Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
 
@@ -82,11 +86,12 @@ Route::post('lead/store', [LeadController::class, 'store'])->name('lead.store');
 
 //end Diploma routes
 Route::get('/', function () {
-
+    //dd(__('hello'));
     $diplomas = Diploma::where('status_id', 1)->get();
     $courses = Course::all();
-    $header = "hola";
-    return view('welcome', compact('diplomas', 'courses', 'header'));
+    //$header = "hola";
+    //return view('welcome', compact('diplomas', 'courses', 'header'));
+    return view('welcome', compact('diplomas', 'courses'));
 })->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -113,12 +118,16 @@ Route::get('create_payment_method/', function () {
 })->name('create_payment_method');
 //stripe Routes
 Route::get('stripe', [StripeController::class, 'stripe']);
+//Route::('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(function () {
     Route::get('/price/create', [StripeController::class, 'createPrice'])->name('stripe.create-price');
     Route::get('/price/delete-or-archive', [StripeController::class, 'deleteOrArchivePrice'])->name('stripe.price.delete-or-archive');
     Route::get('/price/unarchive', [StripeController::class, 'unarchivePrice'])->name('stripe.price.unarchive');
 
 });
+
+Route::get('new/subscribe', [StripeController::class, 'createSubscription']);
+Route::get('create_subs/', [ProductController::class, 'subscribe']);
 
 Route::get('add_payment_method/{seti}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
 Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('product.pricing');

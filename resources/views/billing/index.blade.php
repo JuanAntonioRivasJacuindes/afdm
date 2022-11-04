@@ -6,7 +6,7 @@
     </x-slot>
     <div class="w-full p-3">
 
-        <div class="tab-wrapper w-full text-center bg-white shadow-lg min-h-screen" x-data="{ activeTab: 1 }">
+        <div class="tab-wrapper w-full text-center bg-white shadow-lg min-h-screen" x-data="{ activeTab: 0 }">
             <div class="flex flex-row w-full  bg-gray-200">
                 <label @click="activeTab = 0" class="tab-control mx-auto p-2 w-full"
                     :class="{ 'active bg-primary text-white': activeTab === 0 }">Pagos Pendientes</label>
@@ -107,7 +107,12 @@
                 </div>
                 <div class="tab-panel" :class="{ 'active': activeTab === 2 }"
                     x-show.transition.in.opacity.duration.600="activeTab === 2">
-                    @if (Auth::user()->stripe_id != null)
+                    @if (Auth::user()->stripe_id != null )
+                        <div class="mt-10 sm:mt-0">
+                            @livewire('payment-methods')
+                        </div>
+                        {{--Mostar añanadir metodo de pago a usuarios sin metodo--}}
+                    @elseif (Auth::user()->stripe_id == null)
                         <div class="mt-10 sm:mt-0">
                             @livewire('payment-methods')
                         </div>

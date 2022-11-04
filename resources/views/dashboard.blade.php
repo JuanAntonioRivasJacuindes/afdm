@@ -28,6 +28,7 @@
                     class="hover:shadow-lg  duration-300 w-full bg-white flex mx-auto  md:my-5  flex-wrap items-center sm:-mx-3 shadow-md">
                     <div class="   md:w-1/2 md:px-3 px-5  flex flex-row items-center">
                         <img class="w-20" src="{{$pucharse->product->productType()->flyer_thumbnail() }}" alt="">
+                        {{--<img class="w-20" src="{{$pucharse->product->productType()->poster_url()}}" alt="">--}}
                         <h1 class="text:sm m-5 uppercase  lg:text-lg font-extrabold tracking-tight text-gray-600 md:text-md">
                             <span >{{ $pucharse->product->name ??''}}</span>
                         </h1>

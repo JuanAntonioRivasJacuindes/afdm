@@ -18,12 +18,12 @@ class PaymentMethods extends Component
 
     public function deleteCard($id)
     {
-     
+
         $paymentMethod = $this->user->findPaymentMethod($id);
         $paymentMethod->delete();
- 
 
-        return redirect()->route('profile.show');
+        //no me aucuerdo: return redirect()->route('profile.show'); eso estaba originalmente
+        return redirect()->route('user.billing');
     }
     public function render()
     {

@@ -147,7 +147,7 @@ class DiplomaController extends Controller
     {
 
         $diploma= Diploma::where('product_id',$request->product_id)->first();
-
+        //dd($diploma);
         return view('diploma.show', compact('diploma'));
     }
 

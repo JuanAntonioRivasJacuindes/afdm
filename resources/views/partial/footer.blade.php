@@ -2,7 +2,7 @@
 
     <footer class="text-white body-font w-full bottom-0 text-3xl     ">
 
-        <div class="bg-primary ">
+        <div class="bg-primary">
             <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col md:flex-row">
                 <p class="text-white text-sm text-center md:text-left"> <span>Derechos Reservados &copy;Afodemy</sp>
                 </p>

@@ -28,7 +28,7 @@ class UserController extends Controller
     public function invoices(Request $request)
     {
 
-       $payments = Cashier::stripe()->charges->all(['customer' =>Auth::user()->stripe_id]);
+    $payments = Cashier::stripe()->charges->all(['customer' =>Auth::user()->stripe_id]);
       $portal =  Cashier::stripe()->billingPortal->sessions->create([
         'customer' => $request->user()->stripe_id,
         'return_url' => route('dashboard'),
@@ -68,6 +68,7 @@ class UserController extends Controller
      {
         $user = $request->user();
         $invoices = $user->invoices(['status'=>'open']);
+        //dd($user);
         return view('billing.index',compact('invoices'));
         # code...
      }

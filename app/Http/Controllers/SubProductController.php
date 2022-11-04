@@ -14,7 +14,8 @@ class SubProductController extends Controller
      */
     public function index()
     {
-        //
+        //viendo que onda ...@sdf
+        return "hola";
     }
 
     /**

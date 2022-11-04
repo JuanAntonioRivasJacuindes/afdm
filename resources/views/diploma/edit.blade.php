@@ -78,16 +78,17 @@
                     <p class="leading-6">    @livewire('video.subject-videos',['diploma_id'=>$diploma->id])
                     </p>
                 </div>
+            {{--
                 <div x-show="currentTab === 5"
                     class="flex flex-wrap w-full overflow-x-scroll bg-white p-6 rounded-b rounded-tr shadow-md">
                     <p class="leading-6">
-                        @livewire('subproduct.index',['product_id'=>$diploma->product->id])
+                        php@livewire('subproduct.index',['product_id'=>$diploma->product->id])
                     </p>
                 </div>
+            --}}
             </div>
         </div>
     </div>
 
     </div>
-
 </x-app-layout>

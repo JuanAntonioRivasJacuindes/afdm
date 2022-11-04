@@ -21,15 +21,16 @@ class ActivePayment
        $inscription = Inscription::find($request->inscription_id);
 
        //Si el alumno tiene no esta suscrito
-       if($inscription->allowAccess() && $inscription->user_id == Auth::user()->id || $request->user()->subscribed($request->product_id)){
+       if($inscription->allowAccess()){
            return $next($request);
-       }
-       if (!$request->user()->subscribed($request->product_id)) {
-
-        return route('user.suscribe',['product_id'=>$request->product_id]);
+           //return route('user.suscribe',['product_id'=>$request->product_id]);
         //si el alumno esta suscrito
        }else{
-        abort(403);
+
+            return redirect(route('user.billing'));
+
+
+        abort(403, 'No se ha encontrado tu pago ');
        }
      //si tiene una suscripcion externa
     }

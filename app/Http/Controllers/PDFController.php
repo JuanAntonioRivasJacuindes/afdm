@@ -70,8 +70,8 @@ class PDFController extends Controller
         $date = $request['date'];
         $hours = "3";
         $course = strtoupper($request['course']);
-
-        $nombreImagen = "storage/img/constancia/Constancia 1.jpg";
+        //modificando background de constancia ...
+        $nombreImagen = "storage/img/constancia/Constancia 2.jpg";
         $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
         $pdf = PDF::loadView('PDF.constancias.curso', compact('name', 'course', 'date', 'hours', 'imagenBase64'));
         $pdf->setPaper('letter', 'landscape');
@@ -80,7 +80,8 @@ class PDFController extends Controller
     }
     public function storageConstancia($name, $course, $date, $hours)
     {
-        $nombreImagen = "storage/img/constancia/Constancia 1.jpg";
+        //modificando background de constancia ...
+        $nombreImagen = "storage/img/constancia/constancia 2.jpg";
         $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
         $pdf = PDF::loadView('PDF.constancias.curso', compact('name', 'course', 'date', 'hours', 'imagenBase64'));
         $pdf->setPaper('letter', 'landscape');

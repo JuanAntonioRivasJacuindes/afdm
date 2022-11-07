@@ -47,7 +47,7 @@
         @livewire('navigation-guest-menu')
 
           @endif
-
+            @include('partial.alerts')
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
@@ -70,7 +70,14 @@
 @include('partial.footer')
 </html>
 <script type="text/javascript">
+     // Script For Close alert
 
+  var alert_del = document.querySelectorAll('.alert-del');
+  alert_del.forEach((x) =>
+    x.addEventListener('click', function () {
+      x.parentElement.classList.add('hidden');
+    })
+  );
   function openModal(modalId) {
 
       modal = document.getElementById(modalId)

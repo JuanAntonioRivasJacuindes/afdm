@@ -81,11 +81,15 @@ class User extends Authenticatable
         return Inscription::where('user_id',$this->id)
         ->where('product_id',$product_id)
         ->first();
-        # code...
+
     }
     public function payments()
     {
         return $this->hasManyThrough(MonthlyPayment::class, Inscription::class);
+    }
+    public function order()
+    {
+        return $this->hasMany(Order::class);
     }
     public function isRegistered($product_id)
     {

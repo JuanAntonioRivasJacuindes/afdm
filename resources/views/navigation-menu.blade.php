@@ -64,31 +64,34 @@
 
                             <x-slot name="content">
                                 <!-- Account Management -->
-                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                <div class=" block px-4 py-2 text-xs text-white">
                                     {{ __('Manage Account') }}
                                 </div>
 
                                 @hasrole('Administrator')
 
-                                <x-jet-dropdown-link href="{{ route('admin') }}">
+                                <x-jet-dropdown-link href="{{ route('admin') }}" class=" hover:text-gray-700">
                                     {{ __('Panel de Administración') }}
+                                </x-jet-dropdown-link>
+                                <x-jet-dropdown-link href="{{ route('user.billing') }}" class=" hover:text-gray-700">
+                                    {{ __('Facturación') }}
                                 </x-jet-dropdown-link>
 
                                 @endhasrole
 
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                <x-jet-dropdown-link href="{{ route('profile.show') }}" class=" hover:text-gray-700">
                                     {{ __('Profile') }}
                                 </x-jet-dropdown-link>
 
 
-                                <div class="border-t border-gray-100"></div>
+                                <div class="border-t border-gray-700"></div>
 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
                                     <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();"  class="hover:text-gray-700">
                                         {{ __('Log Out') }}
                                     </x-jet-dropdown-link>
                                 </form>
@@ -142,6 +145,9 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
+                    <x-jet-responsive-nav-link href="{{ route('user.billing') }}" :active="request()->routeIs('user.billing')">
+                        {{ __('Facturación') }}
+                    </x-jet-responsive-nav-link>
                     @hasrole('Administrator')
                     <x-jet-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}
@@ -152,7 +158,7 @@
                         {{ __('Coordinación') }}
                     </x-jet-responsive-nav-link>
                     @endhasrole
-                    <!-- Account Management -->
+                    <!-- Account Management ... -->
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-jet-responsive-nav-link>

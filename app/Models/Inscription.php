@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 class Inscription extends Model
 {
     use HasFactory;
@@ -15,6 +17,10 @@ class Inscription extends Model
         'status_id',
         'voucher',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -22,17 +28,22 @@ class Inscription extends Model
     public function activePayments()
     {
         $now= Carbon::now();
-        $now=$now->subDays(15);
+        $now=$now->subDays(7);
 
         return MonthlyPayment::whereDate('expires_at' , '>',$now )->where('inscription_id',$this->id)->orderBy('expires_at')->get();
     }
     public function payments()
     {
         return $this->hasMany(MonthlyPayment::class);
-        # code...
+
+    }
+    public function nextPayment()
+    {
+        return$this->lastExpire()->addMonth(1);
     }
     public function hasActivePayments()
     {
+
 
         if($this->activePayments()->count()>0){
             return true;
@@ -42,9 +53,8 @@ class Inscription extends Model
     }
     public function allowAccess()
     {
-        if($this->hasActivePayments()||$this->hasGracePeriod()){
-
-
+        // dd($this->user->subscribed($this->product_id));
+        if($this->hasActivePayments()&&$this->user_id == Auth::user()->id ||$this->hasGracePeriod()||$this->user->subscribed($this->product_id)){
             return true;
         }else{
             return false;
@@ -66,7 +76,7 @@ class Inscription extends Model
     {
         if(!$this->hasActivePayments()){
             $date = Carbon::create( $this->product->productType()->date->starts_at);
-            $date= $date->addDays(20);
+            $date= $date->addDays(7);
             return $date;
         }else{
             $date = Carbon::create($this->activePayments()->last()->expires_at);
@@ -77,5 +87,18 @@ class Inscription extends Model
     }
 
 
+     public function lastExpire()
+    {
 
+        if($this->payments->count()==0){
+            $date = Carbon::create( $this->product->productType()->date->starts_at);
+            $date= $date->addDays(7);
+            return $date;
+        }else{
+            $date = Carbon::create($this->payments->last()->expires_at);
+
+            return $date;
+        }
+        # code...
+    }
 }

@@ -55,7 +55,10 @@ class Product extends Model
         }
 
     }
-
+    public function subproducts()
+    {
+        return $this->hasMany(SubProduct::class);
+    }
     public function suscribedUsers()
     {
         return $this->belongsToMany(User::class,'inscriptions')->get();

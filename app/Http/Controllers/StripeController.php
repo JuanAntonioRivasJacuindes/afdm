@@ -11,29 +11,61 @@ use Stripe;
 
 class StripeController extends Controller
 {
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function checkOut(Request $request)
+    {
+        dd($request);
+        return $request->user()->checkout($request->price);
+    }
+    public function CreatePrice(Request $request)
+    {
+
+        try {
+            Cashier::stripe()->prices->create([
+                'unit_amount' => $request->amount,
+                'currency' => $request->currency,
+                'product' => $request->product,
+            ]);
+            session()->flash('success-message', 'Precio Agregado Correctamente');
+        } catch (\Throwable $th) {
+            session()->flash('danger-message', 'No se ha podido agregar');
+        }
+        return redirect()->back();
+    }
     public function stripe()
     {
         return view('stripe');
     }
-    public function addPaymentMethod($pid)
+    public function addPaymentMethod($seti)
     {
-      dd($pid);
+        $intent = Cashier::stripe()->setupIntents->retrieve($seti);
+
         $user = User::find(Auth::user()->id);
-        dd($user->paymentMethods);
+        $user->updateDefaultPaymentMethod($intent->payment_method);
+
         return redirect()->route('profile.show');
+    }
+    public function suscribe(Request $request)
+    {
+
+
+        return view('user.suscribe');
+        # code...
     }
     public function createSubscription(Request $request)
     {
+        //dd("ruta StripeController createSubscription");
+
+        $request->user()->subscribed('los_valua_papus_2');
+        //$res= $request->user()->subscribed('los_valua_papus');
+        //dd($res);
+        $request->user()->newSubscription('test subscription', 'price_1LdL2VK1HFOOH5etmPpgwM1p')->create($request->user()->paymentMethods()->first()->id);
+        //dd($request);
+
         //contenido del request [user:id, stripe_id del producto ]
 
-        $user = User::find(Auth::user()->id);
-        $paymentMethod = $user->defaultPaymentMethod();
-        $user->newSubscription('prod_KkQV008xpCGgJW', 'price_1K4veJK1HFOOH5et7fIRTnGK')->create($paymentMethod->id);
+        //$user = User::find(Auth::user()->id);
+        //$paymentMethod = $user->defaultPaymentMethod();
+        //$user->newSubscription('12', 'price_1K4veJK1HFOOH5et7fIRTnGK')->create($paymentMethod->id);
         return redirect()->route('profile.show');
     }
 
@@ -62,13 +94,47 @@ class StripeController extends Controller
         $subscriptions = Cashier::stripe()->subscriptions->all();
         return $subscriptions;
     }
-    public function createProduct(Request $request)
+    public function unarchivePrice(Request $request)
     {
+        try {
+            Cashier::stripe()->prices->update(
+                $request->plan_id,
+                ['active' => true]
+            );
+            session()->flash('success-message', 'El precio se ha Desarchivado');
+        } catch (\Throwable $th) {
+            session()->flash('danger-message', 'No se ha podido Desarchivar');
+        }
+        return redirect()->back();
+    }
+    public function deleteOrArchivePrice(Request $request)
+    {
+        try {
+            $price = Cashier::stripe()->prices->delete($request->plan_id);
+            session()->flash('success-message', 'Eliminado con exito');
+        } catch (\Throwable $th) {
+
+            try {
+                Cashier::stripe()->prices->update(
+                    $request->plan_id,
+                    ['active' => false]
+                );
+                session()->flash('success-message', 'El precio se ha archivado');
+            } catch (\Throwable $th) {
+                session()->flash('danger-message', 'No se ha podido archivar');
+            }
+        }
+
+        return redirect()->back();
         # code...
+    }
+    public static function createProduct(Request $request)
+    {
+
         $product = Cashier::stripe()->products->create([
             'name' => $request->name,
             'type' => 'service',
-            'statement_descriptor' => $request->statement_descriptor,
+            'statement_descriptor' => $request->name,
             'active' => true,
             'metadata' => [
                 'description' => $request->description,

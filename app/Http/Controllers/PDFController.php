@@ -70,8 +70,8 @@ class PDFController extends Controller
         $date = $request['date'];
         $hours = "3";
         $course = strtoupper($request['course']);
-
-        $nombreImagen = "storage/img/constancia/Constancia 1.jpg";
+        //modificando background de constancia ...
+        $nombreImagen = "storage/img/constancia/Constancia 2.jpg";
         $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
         $pdf = PDF::loadView('PDF.constancias.curso', compact('name', 'course', 'date', 'hours', 'imagenBase64'));
         $pdf->setPaper('letter', 'landscape');
@@ -80,7 +80,8 @@ class PDFController extends Controller
     }
     public function storageConstancia($name, $course, $date, $hours)
     {
-        $nombreImagen = "storage/img/constancia/Constancia 1.jpg";
+        //modificando background de constancia ...
+        $nombreImagen = "storage/img/constancia/constancia 2.jpg";
         $imagenBase64 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen));
         $pdf = PDF::loadView('PDF.constancias.curso', compact('name', 'course', 'date', 'hours', 'imagenBase64'));
         $pdf->setPaper('letter', 'landscape');
@@ -167,7 +168,7 @@ class PDFController extends Controller
         $pagina2 = "data:image/png;base64," . base64_encode(file_get_contents('storage/img/diploma/diploma-bg-2.jpg'));
 
         $pdf = PDF::loadView('PDF.diplomas.diplomado', compact('diplomado', 'name', 'title', 'date', 'cedula', 'date', 'hours', 'credits', 'pagina1', 'pagina2', 'foto'));
-        return $pdf->setPaper('letter')->stream($name . '.pdf');
+        return $pdf->setPaper('letter')->download($name . '.pdf');
     }
 
     public function createWelcome()

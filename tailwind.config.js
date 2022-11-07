@@ -9,12 +9,16 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
-
+    //agregando colores a tailwind
+//                'primary': '#2473AB',
+//                'secondary': '#002644', #1e2135e3
     theme: {
         extend: {
             colors: {
-                'primary': '#2473AB',
-                'secondary': '#002644',
+                'primary': '#002644',
+                'secondary': '#10111e',
+                'bgmenu': "#424867",
+                'btn-register': '#1E40AF'
               },
 
             fontFamily: {

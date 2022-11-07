@@ -21,10 +21,7 @@
                 <x-jet-section-border />
             @endif
             {{-- Mettodos de pago --}}
-            {{-- <div class="mt-10 sm:mt-0">
-                @livewire('payment-methods')
-            </div>
-            <x-jet-section-border /> --}}
+
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.two-factor-authentication-form')

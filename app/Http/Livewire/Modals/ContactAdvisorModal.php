@@ -9,8 +9,9 @@ class ContactAdvisorModal extends Component
 {
     public $product_id;
 
+    public $addItem = false;
 
-
+    public $advisorModal=true;
 
     public function render()
     {
@@ -19,5 +20,15 @@ class ContactAdvisorModal extends Component
     public function createLead()
     {
 
+    }
+
+    public function saved()
+    {
+        $this->render();
+    }
+
+    public function addingItem()
+    {
+        $this->addItem = true;
     }
 }

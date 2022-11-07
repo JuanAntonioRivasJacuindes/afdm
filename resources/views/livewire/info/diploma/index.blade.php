@@ -88,7 +88,7 @@
                             <textarea wire:model.lazy="contact" {{ $field }} class="w-full disabled:bg-gray-200" name="" id="" rows="4"></textarea>
                         </dd>
                     </div>
-                    {{-- Pendiente la edicion de imagenes --}}
+
 
 
             </div>

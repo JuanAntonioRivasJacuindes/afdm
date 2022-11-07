@@ -214,7 +214,7 @@
         </tr>
         </thead>
         <tbody>
-          @foreach($diplomado->subjects as $subject)
+          @foreach($diplomado->subjects() as $subject)
             <tr>
               <td class="left">{{$subject->name ?? 'Sin Nombre'}}</td>
               <td>{{$subject->key ?? 'Sin Clave'}}</td>

@@ -8,9 +8,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\TeacherInfoController;
 use App\Http\Controllers\LeadController;
-
+use App\Http\Controllers\SubProductController;
 use Illuminate\Support\Facades\Storage;
-
 use App\Models\User;
 use App\Models\Diploma;
 use App\Models\Course;
@@ -23,6 +22,9 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
 use Spatie\Permission\Models\Permission;
 use Intervention\Image\ImageManagerStatic as Image;
+use Laravel\Cashier\Cashier;
+use Stripe\Stripe;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +42,7 @@ Route::prefix('admin')->middleware(['permission:manage_system'])->group(function
 
     Route::get('/install', [InstallController::class, 'install']);
 });
+Route::resource('diploma', DiplomaController::class)->except(['show'])->middleware(['permission:manage_system']);
 Route::prefix('forms')->group(function () {
     Route::get('/register-teacher-info', [FormController::class, 'registerTeacherInfo'])->name('form.register.teacher.info');
 
@@ -64,15 +67,16 @@ Route::prefix('coordination')->middleware(['permission:manage_content'])->group(
     Route::resource('/lead', LeadController::class)->except(['store']);
 });
 
-
+Route::get('billing',[UserController::class,'billing'])->middleware('auth')->name('user.billing');
 Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
+//Route::get('diploma/watch', [DiplomaController::class, 'show'])->name('diploma.show');
 //end Admin Routes
 Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
 
 //Diploma routes
 
 //end diploma routes
-Route::resource('diploma', DiplomaController::class)->except(['show']);
+
 Route::post('diploma/update/flyer', [DiplomaController::class, 'updateFlyer'])->name('diploma.update.flyer');
 Route::post('diploma/update/poster', [DiplomaController::class, 'updatePoster'])->name('diploma.update.poster');
 Route::post('lead/store', [LeadController::class, 'store'])->name('lead.store');
@@ -82,20 +86,24 @@ Route::post('lead/store', [LeadController::class, 'store'])->name('lead.store');
 
 //end Diploma routes
 Route::get('/', function () {
-
+    //dd(__('hello'));
     $diplomas = Diploma::where('status_id', 1)->get();
     $courses = Course::all();
-    $header = "hola";
-    return view('welcome', compact('diplomas', 'courses', 'header'));
+    //$header = "hola";
+    //return view('welcome', compact('diplomas', 'courses', 'header'));
+    return view('welcome', compact('diplomas', 'courses'));
 })->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $user = Auth::user();
     return view('dashboard', compact('user'));
 })->name('dashboard');
+Route::get('user/suscribe/{product_id}',[StripeController::class,'suscribe'])->name('user.suscribe');
+Route::middleware(['auth'])->get('/user/payments',[UserController::class,'payments'])->name('user.payments');
+Route::middleware(['auth'])->get('/user/invoices',[UserController::class,'invoices'])->name('user.invoices');
 Route::get('/product/select_schema', [ProductController::class, 'select_schema'])->name('product.select_schema');
 
-Route::get('/diploma/preview/{dip_id}', [DiplomaController::class, 'preview'])->name('diploma.preview');
+Route::get('/diploma/preview/{diploma:slug}', [DiplomaController::class, 'preview'])->name('diploma.preview');
 Route::get('/course/preview/{course_id}', [CourseController::class, 'preview'])->name('course.preview');
 
 Route::get('/sb', function () {
@@ -108,12 +116,29 @@ Route::get('create_payment_method/', function () {
     $intent = $user->createSetupIntent();
     return view('payment.add-payment-method', compact('intent'));
 })->name('create_payment_method');
-
+//stripe Routes
 Route::get('stripe', [StripeController::class, 'stripe']);
-Route::get('add_payment_method/{pid}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
-Route::get('/product/pricing/{id}', [ProductController::class, 'pricing'])->name('product.pricing');
-Route::get('/product/checkout/plan/{id}', [ProductController::class, 'checkoutPlan'])->name('product.plan.checkout')->middleware('auth');
+//Route::('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+Route::prefix('stripe')->middleware(['permission:manage_stripe'])->group(function () {
+    Route::get('/price/create', [StripeController::class, 'createPrice'])->name('stripe.create-price');
+    Route::get('/price/delete-or-archive', [StripeController::class, 'deleteOrArchivePrice'])->name('stripe.price.delete-or-archive');
+    Route::get('/price/unarchive', [StripeController::class, 'unarchivePrice'])->name('stripe.price.unarchive');
+
+});
+
+Route::get('new/subscribe', [StripeController::class, 'createSubscription']);
+Route::get('create_subs/', [ProductController::class, 'subscribe']);
+
+Route::get('add_payment_method/{seti}', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
+Route::get('/product/pricing/', [ProductController::class, 'pricing'])->name('product.pricing');
+
+
+Route::get('/product/checkout/', [ProductController::class, 'checkoutProduct'])->name('product.checkout')->middleware('auth');
 Route::get('/product/checkout/price/{id}', [ProductController::class, 'checkoutPrice'])->name('product.price.checkout')->middleware('auth');
+Route::get('/checkout-succsess/{order_id}',[ProductController::class, 'checkoutSuccess'])->name('checkout.success');
+Route::get('/checkout-cancel/{order_id}',[ProductController::class, 'checkoutCancel'])->name('checkout.cancel');
+
+
 Route::get('/product/buy_intent/success/{buy_intent_id}', [ProductController::class, 'buyIntentSuccess'])->name('product.buy_intent.success');
 Route::get('/product/buy_intent/cancel/{buy_intent_id}', [ProductController::class, 'buyIntentCancel'])->name('product.buy_intent.cancel');
 Route::resource('course', CourseController::class);
@@ -148,6 +173,7 @@ Route::get('view-session', function () {
     return view('student.diploma.index');
 });
 Route::resource('user', UserController::class)->middleware(['auth', 'permission:manage_users']);
+Route::resource('subproduct', SubProductController::class)->middleware(['auth', 'permission:manage_sub_products']);
 //Autenticacion Social
 Route::get('auth/{provider}', [SocialAuthController::class, 'redirectToProvider'])->name('social.auth');
 Route::get('auth/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);

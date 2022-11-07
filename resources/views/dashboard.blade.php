@@ -7,6 +7,7 @@
 
     <!-- Section 1 -->
     <section class=" p-5 bg-white md:px-0">
+
         <div class="container items-center max-w-full px-1 md:px-4 mx-auto xl:px-5">
             @if ($user->inscriptions->count() == 0)
                 <div class="w-full text-center">
@@ -27,6 +28,7 @@
                     class="hover:shadow-lg  duration-300 w-full bg-white flex mx-auto  md:my-5  flex-wrap items-center sm:-mx-3 shadow-md">
                     <div class="   md:w-1/2 md:px-3 px-5  flex flex-row items-center">
                         <img class="w-20" src="{{$pucharse->product->productType()->flyer_thumbnail() }}" alt="">
+                        {{--<img class="w-20" src="{{$pucharse->product->productType()->poster_url()}}" alt="">--}}
                         <h1 class="text:sm m-5 uppercase  lg:text-lg font-extrabold tracking-tight text-gray-600 md:text-md">
                             <span >{{ $pucharse->product->name ??''}}</span>
                         </h1>

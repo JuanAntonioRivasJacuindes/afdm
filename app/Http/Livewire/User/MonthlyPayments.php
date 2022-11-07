@@ -53,11 +53,18 @@ class MonthlyPayments extends Component
     public function addPayment()
     {
         $this->validate();
+        //validacion carga de vaucher que yo vi ...@sdf
+        try{
+            $voucher =$this->voucher->store('files/monthly_payment/vouchers');
+        }catch(\Exception $e){
+            $voucher ='No Disponible';
+        }
+        $this->validate();
         $payment= MonthlyPayment::create([
             'amount'=>$this->amount,
             'inscription_id'=>$this->inscription_id,
             'advisor_id'=>Auth::user()->id,
-            'voucher'=>$this->voucher->store('files/monthly_payment/vouchers'),
+            'voucher'=>$voucher,
             'status_id'=>1,
             'expires_at'=>$this->expires_at,
         ]);

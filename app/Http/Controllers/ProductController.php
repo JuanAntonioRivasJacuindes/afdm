@@ -1,27 +1,71 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Plan;
 use App\Models\BuyIntent;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Pucharse;
 use Laravel\Cashier\Cashier;
 
+use PhpParser\Node\Expr\Cast\Object_;
 class ProductController extends Controller
 {
-    public function pricing($id)
+    public function subscriptionCheckout(Request $request)
     {
-        $product = Product::find($id);
-        $plans = $product->recurrentPlans();
-        $prices = $product->totalPrices();
+        dd($request);
+        # code...
+    }
+    public function checkoutProduct(Request $request)
+    {
+       //dd($request);
+        $user = $request->user();
+        if (!$user->stripe_id) {
+            $user->createAsStripeCustomer();
+        }
 
-        $inscription = $product->inscription();
-        return view('product.pricing', compact('product', 'plans', 'prices', 'inscription'));
+       $order =  $user->order()->create([
+            'subproduct_id'=>$request->subproduct_id,
+            'status_id'=>2,
+            'order_id'=>Str::random(20),
+        ]);
+
+
+            return $user->checkout([$request->stripe_id => 1], [
+                'success_url' => route('checkout.success',['order_id'=>$order->order_id]),
+                'cancel_url' => route('checkout.cancel',['order_id'=>$order->order_id]),
+            ]);
+
+
+    }
+    public function subscribe(Request $request)
+    {
+        //dd("ruta Product Controller subscribe");
+        //auqi me quede
+        $request->user()->stripe_id;
+        $price_cus="price_1LmiKDK1HFOOH5etpZhMHXzF";
+        //dd($req);
+        return Cashier::stripe()->subscriptions->create([
+            'customer' =>$request->user()->stripe_id,
+            'collection_method'=> "send_invoice",
+            'days_until_due'=> 30,
+            'items' => [
+              ['price' => $request->stripe_id],
+            ],
+          ]);
+
+    }
+    public function pricing(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $subproducts= $product->subproducts;
+
+        return view('product.pricing',compact('product','subproducts'));
     }
     public function checkoutPrice($price_id)
     {
@@ -134,43 +178,25 @@ class ProductController extends Controller
     }
 
 
-    public function buyIntentSuccess($buy_intent_id)
+     public function checkoutCancel($order_id)
     {
-        $buy_intent = BuyIntent::find($buy_intent_id);
-        $buy_intent->update([
+        $order = Order::where('order_id',$order_id)->first();
+        $order->update(['status_id'=>5]);
+        return redirect(route('/'))->with('warning-message','Cancelaste la compra');
+
+
+    }
+    public function checkoutSuccess($order_id)
+    {
+        $order = Order::where('order_id',$order_id)->first();
+
+        $order->update([
             'status_id' => 4,
         ]);
-        $this->giveAccessTo($buy_intent->id);
+        OrderController::process($order);
+        return redirect(route('dashboard'));
         # code...
     }
-    public function buyIntentCancel($buy_intent_id)
-    {
 
-        $buy_intent = BuyIntent::find($buy_intent_id);
 
-        $buy_intent->update([
-            'status_id' => 5,
-        ]);
-        return redirect(route('/'));
-        # code...
-    }
-    public function giveAccessTo($buy_intent_id)
-    {
-        $buy_intent = BuyIntent::find($buy_intent_id);
-        $items = $buy_intent->cart->items;
-        $user = User::find($buy_intent->user_id);
-
-        foreach ($items as $item) {
-
-            $user->givePermissionTo($item->getProduct()->getPermissionName());
-
-            $pucharse = Pucharse::create([
-                'user_id' => $user->id,
-                'plan_id' => $item->plan->id,
-                'product_id' => $item->getProduct()->id,
-                'buy_intent_id' => $buy_intent->id,
-            ]);
-        }
-        return redirect()->route('dashboard');
-    }
 }

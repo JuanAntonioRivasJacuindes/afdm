@@ -4,10 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Cashier;
 
 class UserController extends Controller
 {
+    public function payments()
+    {
+
+
+       $payments = Cashier::stripe()->charges->all(['customer' =>Auth::user()->stripe_id]);
+
+
+    //    $portal =  Cashier::stripe()->billingPortal->sessions->create([
+    //     'customer' => $user->stripe_id,
+    //     'return_url' => route('dashboard'),
+    //   ]);
+
+        return view('user.payments',compact('payments'));
+
+    }
+
+    public function invoices(Request $request)
+    {
+
+    $payments = Cashier::stripe()->charges->all(['customer' =>Auth::user()->stripe_id]);
+      $portal =  Cashier::stripe()->billingPortal->sessions->create([
+        'customer' => $request->user()->stripe_id,
+        'return_url' => route('dashboard'),
+      ]);
+
+      return redirect($portal->url);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,6 +63,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     public function billing(Request $request)
+     {
+        $user = $request->user();
+        $invoices = $user->invoices(['status'=>'open']);
+        //dd($user);
+        return view('billing.index',compact('invoices'));
+        # code...
+     }
     public function store(Request $request)
     {
         //

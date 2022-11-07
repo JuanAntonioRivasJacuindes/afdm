@@ -1,7 +1,20 @@
-<x-app-layout >
+<?php
+    // punto de control ... toma de proyecto ... :3 empiezo a ver que pedo ...@sfd
+    /*
+    dd(__("hola"))
+    dd($diplomas);
+    foreach ($diplomas as $diploma) {
+        echo "<div>";
+        //dd($diploma->flyer);
+        //var_dump($diploma);
+        //echo gettype($diplomas);
+        echo "</div>";
+    }
+    */
+?>
+<x-app-layout>
 
-    <link rel='stylesheet'
-        href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.carousel.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.carousel.min.css'>
         @section('title','Afodemy.com')
         @section('description','Diplomados y cursos de criminología y criminalistica')
         @section('route','https://user.afodemy.com')
@@ -22,10 +35,18 @@
 /* Handle on hover */
 
         .layout_background{
-            background-image: url("{{ asset('storage/img/landing_bg.webp') }}");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
+        /*background-image: url("{{ asset('storage/img/landing_bg.webp') }}");*/
+        background: #3756ad;
+        /*background-repeat: no-repeat;*/
+        /*background-size: cover;*/
+        /*background-attachment: fixed;*/
+        margin: 0;
+        padding: 0;
+
+        }
+        body{
+            padding: 0;
+            margin: 0;
         }
     #sync1 .item {
 
@@ -55,7 +76,7 @@
     #sync2 .item:hover {
         transform: scale(1.1);
         -webkit-transition: transform .2s ease-in-out;
-        filter: brightness(2);
+        /*filter: brightness(2);*/
 
     }
 
@@ -73,22 +94,19 @@
     #sync1.owl-theme {
         position: relative;
     }
+    .backgroud-content{
+        background: #023a8de7
+    }
 </style>
 
 <body class="bg-primary">
-
     <!-- content goes here -->
-
-
-    <section class="  sm:w-full  sm:mx-0 sm:px-0 lg:w-auto lg:mx-20 lg:px-20   justify-center items-center">
-
-
-        <div class="w-full md:w-full rounded-2xl shadow-lg content-center ">
+    <section class="sm:w-full  sm:mx-0 sm:px-0 lg:w-auto lg:mx-20 lg:px-20 p-7 justify-center items-center">
+        <div class="backgroud-content w-full md:w-full rounded-2xl shadow-lg content-center">
             <div id="sync1" class="owl-carousel owl-theme ">
                 @foreach ($diplomas as $diploma)
                     <div class="item aspect-4/3 lg:aspect-16/9 static"
-                        style="  background-image: url('{{ $diploma->poster_url() }}'); ">
-
+                        style="background-image: url('{{ $diploma->poster_url() }}'); ">
                         <div
                             class="rounded-2xl w-full lg:w-1/2 bg-slate-700 bg-opacity-50 absolute bottom-0 text-sm lg:text-md max-h-min  ">
                             <div class="p-2 lg:p-5 text-justify">
@@ -100,7 +118,7 @@
                                         class="bg-gray-800 p-3   rounded-md items-center ">INFORMACIÓN</a>
                                     <a href="https://api.whatsapp.com/send?phone=+521{{$diploma->info->contact ?? '5520824098'}}&text=Hola,%20Tengo%20interes%20en%20{{$diploma->title}}" target="blank" class="bg-gray-800 p-3 rounded-md items-center ">INSCRIPCION</a>
                                     <a href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}"
-                                        class="bg-gray-800 p-3  rounded-lg "> COMPARTIR</a>
+                                        class="bg-gray-800 p-3  rounded-lg ">COMPARTIR</a>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +130,8 @@
             <div id="sync2" class="owl-carousel owl-theme my-2">
                 @foreach ($diplomas as $diploma)
                     <div class="item hover:bg-black my-1">
-                        <img class="brightness-50" src="{{ $diploma->flyer_thumbnail() }}" alt="">
+                        <img class="brightness-50" src="{{ $diploma->flyer_thumbnail()}}" alt="">
+                        {{--<img class="brightness-50" src="{{ $diploma->poster_url() }}" alt="">--}}
                     </div>
                 @endforeach
 
@@ -225,4 +244,4 @@
 
 
 
-    </x-app-layout>
+</x-app-layout>

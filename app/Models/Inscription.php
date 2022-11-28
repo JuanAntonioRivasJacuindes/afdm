@@ -15,6 +15,7 @@ class Inscription extends Model
         'product_id',
         'advisor_id',
         'status_id',
+        'id_bfgiftcourses',
         'voucher',
     ];
     public function user()
@@ -24,6 +25,11 @@ class Inscription extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    //buenfin
+    public function buenfinGiftcourses()
+    {
+        return $this->belongsTo(BuenfinGiftcourses::class, 'id_bfgiftcourses');
     }
     public function activePayments()
     {

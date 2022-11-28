@@ -8,6 +8,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('/') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
+                        {{--<img  class = "py-0 px-3" src="{{ asset('storage\img\logoswebblanco.png') }}" style="height: 100px" alt="" loading="lazy" >--}}
                     </a>
                 </div>
 

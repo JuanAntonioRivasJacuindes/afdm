@@ -20,8 +20,11 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         @livewireStyles
+        <style>
 
+        </style>
         <!-- Scripts -->
+
         <script src="{{ mix('js/app.js') }}" defer></script>
     <body>
         <div class="min-h-screen bg-gray-100">

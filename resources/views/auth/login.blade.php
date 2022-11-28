@@ -2,6 +2,9 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
+            {{--<a href="{{ route('/') }}">
+                <img  class = "py-0 px-3" src="{{ asset('storage\img\logosweb.png') }}" style="height: 200px" alt="" loading="lazy" >
+            </a>--}}
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

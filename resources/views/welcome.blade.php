@@ -1,17 +1,3 @@
-<?php
-    // punto de control ... toma de proyecto ... :3 empiezo a ver que pedo ...@sfd
-    /*
-    dd(__("hola"))
-    dd($diplomas);
-    foreach ($diplomas as $diploma) {
-        echo "<div>";
-        //dd($diploma->flyer);
-        //var_dump($diploma);
-        //echo gettype($diplomas);
-        echo "</div>";
-    }
-    */
-?>
 <x-app-layout>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.carousel.min.css'>
@@ -21,10 +7,8 @@
 
 <style>
     ::-webkit-scrollbar {
-  width: 0px;
-
-
-}
+    width: 0px;
+    }
 
 /* Track */
 
@@ -36,7 +20,7 @@
 
         .layout_background{
         /*background-image: url("{{ asset('storage/img/landing_bg.webp') }}");*/
-        background: #3756ad;
+        background: #289dcb;
         /*background-repeat: no-repeat;*/
         /*background-size: cover;*/
         /*background-attachment: fixed;*/
@@ -103,7 +87,7 @@
     <!-- content goes here -->
     <section class="sm:w-full  sm:mx-0 sm:px-0 lg:w-auto lg:mx-20 lg:px-20 p-7 justify-center items-center">
         <div class="backgroud-content w-full md:w-full rounded-2xl shadow-lg content-center">
-            <div id="sync1" class="owl-carousel owl-theme ">
+            <div id="sync1" class="owl-carousel owl-theme">
                 @foreach ($diplomas as $diploma)
                     <div class="item aspect-4/3 lg:aspect-16/9 static"
                         style="background-image: url('{{ $diploma->poster_url() }}'); ">
@@ -130,8 +114,8 @@
             <div id="sync2" class="owl-carousel owl-theme my-2">
                 @foreach ($diplomas as $diploma)
                     <div class="item hover:bg-black my-1">
-                        <img class="brightness-50" src="{{ $diploma->flyer_thumbnail()}}" alt="">
-                        {{--<img class="brightness-50" src="{{ $diploma->poster_url() }}" alt="">--}}
+                        {{--<img class="brightness-50" src="{{ $diploma->flyer_thumbnail()}}" alt="">--}}
+                        <img class="brightness-50" src="{{ $diploma->poster_url() }}" alt="">
                     </div>
                 @endforeach
 

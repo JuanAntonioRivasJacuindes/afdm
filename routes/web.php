@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Diploma;
 use App\Models\Course;
+use App\Models\BuenfinLeads;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DiplomaController;
@@ -24,6 +25,8 @@ use Spatie\Permission\Models\Permission;
 use Intervention\Image\ImageManagerStatic as Image;
 use Laravel\Cashier\Cashier;
 use Stripe\Stripe;
+use App\Http\Controllers\BuenfinController;
+use App\Models\BuenfinCourses;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,8 +71,9 @@ Route::prefix('coordination')->middleware(['permission:manage_content'])->group(
 });
 
 Route::get('billing',[UserController::class,'billing'])->middleware('auth')->name('user.billing');
-Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
-//Route::get('diploma/watch', [DiplomaController::class, 'show'])->name('diploma.show');
+//Route::get('diploma/watch', [DiplomaController::class, 'show'])->middleware('ActivePayment','auth')->name('diploma.show');
+Route::get('diploma/watch', [DiplomaController::class, 'show'])->name('diploma.show');
+Route::get('diploma/watch/extra', [BuenfinController::class, 'extra'])->name('extra.show');
 //end Admin Routes
 Route::post('update/zoomLink', [DiplomaController::class, 'updateZoomLink'])->name('diploma.zoom-link.update');
 
@@ -110,6 +114,15 @@ Route::get('/sb', function () {
     return view('sandbox');
 });
 
+Route::prefix('buenfin')->group(function(){
+
+    //Route::get('/', [BuenfinController::class, 'index']);
+    Route::get('leads', function(){
+        $leadsbuenfin=BuenfinLeads::all();
+        return view('leads-buenfin', compact('leadsbuenfin'));
+    })->middleware('auth')->middleware(['permission:manage_content'])->name('leads.buenfin');
+    Route::post('send/data', [BuenfinController:: class, 'send_data'])->name('send.data');
+  });
 
 Route::get('create_payment_method/', function () {
     $user = User::find(Auth::user()->id);

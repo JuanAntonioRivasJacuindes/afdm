@@ -13,7 +13,9 @@
 
                         <h2 class="mb-5">Términos y condiciones</h2>
 
-                        <p>¡Hola! Bienvenido a Afodemy, nos da mucho gusto tenerte aquí. Nos encanta ofrecerte educación
+                        <p>¡Hola! Bienvenido a "AFODEMY" Academia de ciencias forenses y seguridad,
+                            y el "IMETS" Institutos Mexicano de Estudios Técnicos y Superiores en Seguridad Nacional, Servicios Periciales
+                            y Procuracion de justica, nos da mucho gusto tenerte aquí. Nos encanta ofrecerte educación
                             de calidad para tu desarrollo académico y profesional, por eso permitimos que cualquier
                             persona experta en algún tema pueda crear y subir su contenido educativo con nosotros y de
                             igual manera que cualquier persona del mundo puede inscribirse a estos. Nuestro modelo de

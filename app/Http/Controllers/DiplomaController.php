@@ -151,6 +151,7 @@ class DiplomaController extends Controller
         return view('diploma.show', compact('diploma'));
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -215,6 +216,6 @@ class DiplomaController extends Controller
     public function preview($id)
     {
         $diploma = Diploma::findOrFail($id);
-        return view('diploma.preview', compact('diploma'));
+        return view('diploma.preview', compact('diploma', 'buenfincourses'));
     }
 }

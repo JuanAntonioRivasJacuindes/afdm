@@ -133,12 +133,12 @@
                         </p>
                         --}}
                         <p>
-                            IMETS trabaja en alianza estratégica con “Afodemy,
-                            Academia de Ciencias Forenses y Seguridad S.A. de C.V.” Quien se encarga en gran
-                            parte de la operación interna, como dar identidad y promoción a cada oferta educativa a
+                            Nuestra razón social es AFODEMY S.A de C.V, con nuestras marcas registradas de "AFODEMY" Academia de ciencias forenses y seguridad,
+                            y el "IMETS" Institutos Mexicano de Estudios Técnicos y Superiores en Seguridad Nacional, Servicios Periciales
+                            y Procuracion de justica quienes se encargan de la operación interna, como dar identidad y promoción a cada oferta educativa a
                             través del área de marketing y diseño, la investigación y gestión de la plantilla de
                             docentes a cargo del área de “Coordinación Académica”, el seguimiento y acompañamiento
-                            al alumnado por parte de “Control Escolar”, Afodemy también se encarga de apoyar toda la
+                            al alumnado por parte de “Control Escolar”, AFODEMY también se encarga de apoyar toda la
                             tramitología que se requiere para validar, legalizar y certificar ante las entidades e
                             instancias pertinentes.
 
@@ -208,7 +208,6 @@
                                     <!-- <img src="img/profile.jpg" alt="profile picture" class="rounded-lg"> -->
                                     <div class="relative w-24 h-24">
                                         <img class="rounded-full border border-gray-100 shadow-sm" src="{{ asset('storage/img/partner-ces-1.jpeg')}}" alt="user image" />
-
                                     </div>
                                 </div>
 

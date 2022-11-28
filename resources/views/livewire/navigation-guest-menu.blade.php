@@ -16,8 +16,9 @@
                         <a href="{{ route('/') }}">
                             {{--<img class="w-3/4 m-3" src="{{ asset('storage\img\logo_afodemy_blanco.png') }}"
                                 alt="">--}}
-                            {{--<img  class = "mr-0.5 verti" src="{{ asset('storage\img\afologo-blanco.png') }}" style="height: 50px" alt="" loading="lazy" >--}}
-                            <img  class = "py-0 px-3" src="{{ asset('storage\img\logoswebblanco.png') }}" style="height: 100px" alt="" loading="lazy" >
+                            {{--<img  class = "mr-0.5 verti" src="{{ asset('storage\img\afologo-blanco.png') }}" style="height: 50px" alt="" loading="lazy" >
+                            <img  class = "py-0 px-3" src="{{ asset('storage\img\logoswebblanco.png') }}" style="height: 100px" alt="" loading="lazy">--}}
+                            <x-jet-application-mark class="block h-9 w-auto"/>
                         </a>
                     </div>
                     <!-- primary nav -->

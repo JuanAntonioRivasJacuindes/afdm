@@ -27,9 +27,9 @@
                                 <div class="container w-full  ">
                                     <div class="w-full  flex flex-col md:flex-row ">
                                         <div class="w-full md:w-1/2">
-                                            <img alt="flyer" class="w-full   shadow-2xl"
-                                                src="{{ asset($diploma->flyer_thumbnail()) }}">
-                                                {{--<img src="http://localhost:8000/storage/course/posters/rPLilEmho76vwpoNnqDD94G4GjFDzRP6vtKjKSlC.jpg" alt="flyer" class="w-full   shadow-2xl">--}}
+                                            {{--<img alt="flyer" class="w-full   shadow-2xl"
+                                                src="{{ asset($diploma->flyer_thumbnail()) }}">--}}
+                                                <img src="http://localhost:8000/storage/course/posters/rPLilEmho76vwpoNnqDD94G4GjFDzRP6vtKjKSlC.jpg" alt="flyer" class="w-full   shadow-2xl">
                                         </div>
                                         <div
                                             class="w-full md:w-1/2 p-5 md:p-10  bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">

@@ -80,12 +80,14 @@
                                     <x-jet-dropdown-link href="{{route('about')}}" class=" hover:text-gray-700">
                                         {{ __('¿Quiénes somos?') }}
                                     </x-jet-dropdown-link>
+                                    {{--
                                     <x-jet-dropdown-link href="{{route('about')}}" class=" hover:text-gray-700">
                                         {{ __('Profesores') }}
                                     </x-jet-dropdown-link>
                                     <x-jet-dropdown-link href="#" class=" hover:text-gray-700">
                                         {{ __('Certificación') }}
                                     </x-jet-dropdown-link>
+                                    --}}
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>

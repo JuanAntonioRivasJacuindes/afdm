@@ -27,9 +27,8 @@
                                 <div class="container w-full  ">
                                     <div class="w-full  flex flex-col md:flex-row ">
                                         <div class="w-full md:w-1/2">
-                                            {{--<img alt="flyer" class="w-full   shadow-2xl"
-                                                src="{{ asset($diploma->flyer_thumbnail()) }}">--}}
-                                                <img src="http://localhost:8000/storage/course/posters/rPLilEmho76vwpoNnqDD94G4GjFDzRP6vtKjKSlC.jpg" alt="flyer" class="w-full   shadow-2xl">
+                                            <img alt="flyer" class="w-full   shadow-2xl"
+                                                src="{{ asset($diploma->flyer_thumbnail()) }}">
                                         </div>
                                         <div
                                             class="w-full md:w-1/2 p-5 md:p-10  bg-gradient-to-r from-slate-400 to-slate-100 opacity-80 z-10 shadow-2xl ">
@@ -118,11 +117,13 @@
 
 
                                                 </div>
+                                                {{--
                                                 <form action="{{ route('product.pricing') }}" class="w-full">
                                                     <input type="text" name="product_id" id=""
                                                         value="{{ $diploma->product->id }}" hidden>
                                                     <x-jet-button>Inscribirme en linea</x-jet-button>
                                                 </form>
+                                                --}}
                                                 <a target="blank"
                                                     class="w-full inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs m-1 text-white uppercase tracking-widest hover:bg-secondary active:bg-secondary focus:outline-none focus:border-secondary focus:ring disabled:opacity-25 transition"
                                                     href="http://www.facebook.com/sharer.php?u={{ route('diploma.preview', $diploma->id) }}">Compartir</a>

@@ -1,10 +1,12 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-            {{--<a href="{{ route('/') }}">
-                <img  class = "py-0 px-3" src="{{ asset('storage\img\logosweb.png') }}" style="height: 200px" alt="" loading="lazy" >
-            </a>--}}
+            {{--<x-jet-authentication-card-logo />--}}
+            <div>
+                <a href="{{route('/')}}">
+                    <img  src="{{ asset('storage/img/imetsafodemy-n.png') }}" alt="" style="width: 300px; height: 150px">
+                </a>
+            </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

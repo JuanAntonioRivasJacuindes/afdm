@@ -20,7 +20,7 @@
 
         .layout_background{
         /*background-image: url("{{ asset('storage/img/landing_bg.webp') }}");*/
-        background: #289dcb;
+        /*background: #289dcbb7;*/
         /*background-repeat: no-repeat;*/
         /*background-size: cover;*/
         /*background-attachment: fixed;*/
@@ -79,7 +79,7 @@
         position: relative;
     }
     .backgroud-content{
-        background: #023a8de7
+        background: #474e5e
     }
 </style>
 
@@ -114,8 +114,8 @@
             <div id="sync2" class="owl-carousel owl-theme my-2">
                 @foreach ($diplomas as $diploma)
                     <div class="item hover:bg-black my-1">
-                        {{--<img class="brightness-50" src="{{ $diploma->flyer_thumbnail()}}" alt="">--}}
-                        <img class="brightness-50" src="{{ $diploma->poster_url() }}" alt="">
+                        <img class="brightness-50" src="{{ $diploma->flyer_thumbnail()}}" alt="">
+                        {{--<img class="brightness-50" src="{{ $diploma->poster_url() }}" alt="">--}}
                     </div>
                 @endforeach
 

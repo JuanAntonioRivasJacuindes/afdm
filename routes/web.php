@@ -193,13 +193,14 @@ Route::get('auth/{provider}/callback', [SocialAuthController::class, 'handleProv
 
 //terms & privacy
 Route::get('terms', function () {
-    return view('terms');
+
+    return view('terms', );
 })->name('terms');
 Route::get('policy', function () {
 
     return view('policy');
 })->name('policy');
 Route::get('about', function () {
-
-    return view('about');
+    $user = Auth::user();
+    return view('about', compact('user'));
 })->name('about');

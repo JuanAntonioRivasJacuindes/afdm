@@ -1,47 +1,53 @@
 <div>
     <footer class="p-4 bg-primary shadow md:px-6 md:py-8">
-        <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="{{'/'}}" class="flex items-center mb-4 sm:mb-0">
-                <div class="w-14">
-                    @livewire('logo-footer-a')
-                </div>
-            </a>
-            <!--facebook-->
-            <a href="https://www.facebook.com/afodemy" class="text-white">
-                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    class="w-a h-5" viewBox="0 0 24 24">
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                </svg>
-            </a>
-            <!--Instagram-->
-            <a href="https://www.instagram.com/afodemy" class="ml-3 text-white">
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                    <rect width="20" height="20" x="2" y="2" rx="5"
-                        ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                </svg>
-            </a>
-            <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-                {{--
-                <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6 "></a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6"></a>
-                </li>
-                --}}
-                <li>
-                    <a href="#" class="mr-4 hover:underline md:mr-6 ">Terminos y condiciones</a>
-                </li>
-                <li>
-                    <a href="#" class="hover:underline">Politica de privacidad</a>
-                </li>
-            </ul>
-        </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
-        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">Derechos Reservados &copy;Afodemy
-        </span>
+        <div class="flex flex-row">
+            <div class="w-14 items-center mb-4 sm:mb-0">
+                @livewire('logo-footer-a')
+            </div>
+            <div class="w-full flex flex-col justify-center">
+                <span class="flex flex-row justify-center mb-4">
+                    <!--facebook-->
+                    <a href="https://www.facebook.com/afodemy" class="text-white">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-a h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <!--Instagram-->
+                    <a href="https://www.instagram.com/afodemy" class="ml-3 text-white">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5"
+                                ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                </span>
+                <ul class="flex flex-row justify-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+                    {{--
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6 "></a>
+                    </li>
+                    <li>
+                        <a href="#" class="mr-4 hover:underline md:mr-6"></a>
+                    </li>
+                    --}}
+                    <li>
+                        <a href="{{route('terms')}}"  class="mr-4 hover:underline md:mr-6 ">Terminos y condiciones</a>
+                    </li>
+                    <li>
+                        <a href="{{route('policy')}}" class="hover:underline">Politica de privacidad</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-16 items-center mb-4 sm:mb-0">
+                @livewire('logo-footer-i')
+            </div>
+
+    </div>
+    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
+    <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">Derechos Reservados ©Afodemy
+    </span>
     </footer>
 </div>
 @php

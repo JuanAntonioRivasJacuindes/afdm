@@ -216,6 +216,6 @@ class DiplomaController extends Controller
     public function preview($id)
     {
         $diploma = Diploma::findOrFail($id);
-        return view('diploma.preview', compact('diploma', 'buenfincourses'));
+        return view('diploma.preview', compact('diploma'));
     }
 }

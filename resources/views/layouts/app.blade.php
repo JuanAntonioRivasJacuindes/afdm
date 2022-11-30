@@ -45,7 +45,7 @@
 <body class="font-sans antialiased">
     <x-jet-banner />
 
-    <div class="min-h-screen bg-gray-100 layout_background">
+    <div class="min-h-screen bg-gray-100 layout_background bg-gradient-to-r from-blue-900 via-yellow-500  to-blue-500">
         @if (!Auth::guest())
             @livewire('navigation-menu')
         @else
